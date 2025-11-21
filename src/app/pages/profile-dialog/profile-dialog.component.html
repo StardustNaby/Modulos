@@ -1,0 +1,99 @@
+<nb-card>
+  <nb-card-header>
+    <div class="d-flex align-items-center justify-content-between">
+      <h5 class="mb-0">Configuración del Perfil</h5>
+      <button nbButton ghost (click)="cancel()" size="small">
+        <nb-icon icon="close-outline"></nb-icon>
+      </button>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="text-center mb-4">
+      <nb-user 
+        [picture]="user.picture" 
+        [name]="user.name" 
+        size="xlarge"
+        [showTitle]="false">
+      </nb-user>
+      <button nbButton status="basic" size="small" class="mt-2">
+        <nb-icon icon="camera-outline"></nb-icon> Cambiar foto
+      </button>
+    </div>
+
+    <div class="history-section mb-4">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h6 class="mb-0">Historial destacado</h6>
+        <nb-icon icon="award-outline"></nb-icon>
+      </div>
+      <div class="history-item" *ngFor="let item of history">
+        <strong>{{ item.title }}</strong>
+        <p>{{ item.description }}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Nombre completo</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        [(ngModel)]="user.name"
+        placeholder="Tu nombre">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input 
+        type="email" 
+        class="form-control" 
+        [(ngModel)]="user.email"
+        placeholder="tu@email.com">
+    </div>
+
+    <div class="form-group">
+      <label>Biografía</label>
+      <textarea 
+        class="form-control" 
+        rows="3"
+        [(ngModel)]="user.bio"
+        placeholder="Cuéntanos sobre ti..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Ubicación</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        [(ngModel)]="user.location"
+        placeholder="Ciudad, País">
+    </div>
+
+    <div class="form-group">
+      <label>Teléfono</label>
+      <input 
+        type="tel" 
+        class="form-control" 
+        [(ngModel)]="user.phone"
+        placeholder="+1234567890">
+    </div>
+
+    <div class="form-group">
+      <label>Sitio web</label>
+      <input 
+        type="url" 
+        class="form-control" 
+        [(ngModel)]="user.website"
+        placeholder="www.misitio.com">
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="d-flex justify-content-end">
+      <button nbButton status="basic" (click)="cancel()" class="mr-2">
+        Cancelar
+      </button>
+      <button nbButton status="primary" (click)="submit()">
+        Guardar cambios
+      </button>
+    </div>
+  </nb-card-footer>
+</nb-card>
+

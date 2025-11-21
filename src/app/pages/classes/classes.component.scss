@@ -1,0 +1,99 @@
+@import '../../@theme/styles/themes';
+@import 'bootstrap/scss/mixins/breakpoints';
+@import '@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  .classes-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0 4rem;
+  }
+
+  .classes-header {
+    padding: 0 1.5rem 1rem;
+
+    h1 {
+      margin: 0;
+    }
+
+    p {
+      margin: 0.3rem 0 0;
+      color: nb-theme(text-hint-color);
+    }
+  }
+
+  .classes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1.5rem;
+  }
+
+  .class-card {
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    nb-card-body {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+
+      @include media-breakpoint-down(sm) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .class-main {
+    h4 {
+      margin: 0;
+    }
+
+    .studio {
+      display: block;
+      color: nb-theme(text-hint-color);
+      margin-bottom: 0.4rem;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      color: nb-theme(text-hint-color);
+
+      nb-icon {
+        font-size: 1rem;
+        margin-right: 0.25rem;
+      }
+    }
+  }
+
+  .class-side {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+
+    @include media-breakpoint-down(sm) {
+      text-align: left;
+      align-items: flex-start;
+    }
+  }
+
+  .certificate {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.85rem;
+
+    &.active {
+      border-color: rgba(56, 189, 248, 0.6);
+      color: #38bdf8;
+    }
+  }
+}
+

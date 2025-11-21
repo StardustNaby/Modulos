@@ -1,0 +1,268 @@
+@import '../../@theme/styles/themes';
+@import 'bootstrap/scss/mixins/breakpoints';
+@import '@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  .search-page {
+    min-height: 100vh;
+    padding: 2rem 0 4rem;
+    background: linear-gradient(180deg, rgba(9, 9, 18, 0.95) 0%, #080512 60%);
+  }
+
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr);
+    gap: 2rem;
+    padding: 2.5rem 2rem;
+    border-radius: 32px;
+    background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.25), rgba(15, 15, 25, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+
+    @include media-breakpoint-down(md) {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+
+  .hero-content {
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: nb-theme(text-hint-color);
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .search-bar {
+    background: rgba(8, 6, 15, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &.loading {
+      border-color: rgba(168, 85, 247, 0.5);
+      box-shadow: 0 0 18px rgba(168, 85, 247, 0.35);
+    }
+
+    &.focused {
+      transform: scale(1.02);
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 30px 80px rgba(8, 0, 15, 0.7);
+      background: rgba(12, 10, 24, 0.95);
+    }
+
+    nb-icon {
+      color: nb-theme(color-primary-300);
+      font-size: 1.5rem;
+    }
+
+    input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: nb-theme(text-basic-color);
+      font-size: 1rem;
+
+      &::placeholder {
+        color: nb-theme(text-hint-color);
+      }
+    }
+
+    button[nbButton] {
+      border-radius: 999px;
+      padding: 0 1.75rem;
+    }
+  }
+
+  .chips {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+
+    button[nbButton] {
+      border-radius: 999px;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  .animation {
+    position: relative;
+    min-height: 220px;
+
+    .circle {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(168, 85, 247, 0.35);
+      filter: blur(10px);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .circle-2 {
+      width: 70px;
+      height: 70px;
+      top: 140px;
+      right: 0;
+      background: rgba(236, 72, 153, 0.4);
+      animation-duration: 7s;
+    }
+
+    .pulse {
+      position: absolute;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      animation: pulse 4s ease-out infinite;
+    }
+
+    .pulse-1 {
+      width: 140px;
+      height: 140px;
+      bottom: 20px;
+      left: 30px;
+    }
+
+    .pulse-2 {
+      width: 90px;
+      height: 90px;
+      top: 20px;
+      right: 40px;
+      animation-delay: 1.2s;
+    }
+  }
+
+  .trending-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+
+    &.dimmed {
+      opacity: 0.15;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+  }
+
+  .section-header {
+    margin-bottom: 1.5rem;
+
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    span {
+      color: nb-theme(text-hint-color);
+      font-size: 0.9rem;
+    }
+  }
+
+  .trending-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .trend-card {
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(7, 5, 16, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+    .trend-cover {
+      padding-top: 62%;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+
+      .trend-tag {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(0, 0, 0, 0.65);
+        padding: 0.3rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+    }
+
+    .trend-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+
+      .trend-user {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+
+        span {
+          color: nb-theme(text-hint-color);
+          font-size: 0.85rem;
+        }
+      }
+
+      p {
+        margin: 0.5rem 0;
+        color: nb-theme(text-basic-color);
+      }
+
+      .trend-meta {
+        display: flex;
+        justify-content: space-between;
+        color: nb-theme(text-hint-color);
+        font-size: 0.85rem;
+
+        nb-icon {
+          font-size: 1rem;
+          margin-right: 0.35rem;
+        }
+      }
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0) translateX(0);
+    }
+    50% {
+      transform: translateY(-10px) translateX(8px);
+    }
+    100% {
+      transform: translateY(0) translateX(0);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(0.95);
+      opacity: 0.8;
+    }
+    70% {
+      transform: scale(1.2);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+

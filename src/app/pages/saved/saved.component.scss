@@ -1,0 +1,100 @@
+@import '../../@theme/styles/themes';
+@import 'bootstrap/scss/mixins/breakpoints';
+@import '@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  .saved-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 0 4rem;
+  }
+
+  .saved-header {
+    padding: 0 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h1 {
+      margin: 0;
+    }
+
+    p {
+      margin: 0.3rem 0 0;
+      color: nb-theme(text-hint-color);
+    }
+
+    .collections {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+
+      button[nbButton] {
+        border-radius: 999px;
+        border-color: rgba(255, 255, 255, 0.12);
+
+        &.active {
+          background: rgba(168, 85, 247, 0.2);
+          border-color: rgba(168, 85, 247, 0.45);
+        }
+      }
+    }
+  }
+
+  .saved-grid {
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .saved-card {
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(9, 6, 18, 0.9);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+
+    .cover {
+      padding-top: 65%;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+
+      .tag {
+        position: absolute;
+        top: 0.8rem;
+        right: 0.8rem;
+        background: rgba(0, 0, 0, 0.65);
+        padding: 0.3rem 0.8rem;
+        border-radius: 999px;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+      }
+    }
+
+    .body {
+      padding: 1.1rem 1.25rem 1.3rem;
+
+      h4 {
+        margin: 0;
+      }
+
+      p {
+        margin: 0.3rem 0 0.8rem;
+        color: nb-theme(text-hint-color);
+      }
+
+      .actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+
+        button[nbButton] {
+          border-radius: 999px;
+        }
+      }
+    }
+  }
+}
+

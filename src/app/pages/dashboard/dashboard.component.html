@@ -1,42 +1,146 @@
-<div class="row">
-  <div class="col-xxxl-3 col-md-6" *ngFor="let statusCard of statusCards">
-    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type">
-      <i [ngClass]="statusCard.iconClass"></i>
-    </ngx-status-card>
+<div class="feed-container">
+  <div class="feed-main">
+    <!-- Crear nueva publicación -->
+    <nb-card class="create-post-card mb-4">
+      <nb-card-body>
+        <div class="d-flex align-items-center mb-3">
+          <nb-user [picture]="currentUser.picture" [name]="currentUser.name" size="small"></nb-user>
+          <input 
+            type="text" 
+            class="create-post-input" 
+            placeholder="¿Qué estás pensando?"
+            (click)="openCreatePost()">
+        </div>
+        <div class="post-actions">
+          <button nbButton ghost status="basic" size="small" class="action-btn">
+            <nb-icon icon="video-outline"></nb-icon>
+            <span>Video</span>
+          </button>
+          <button nbButton ghost status="basic" size="small" class="action-btn">
+            <nb-icon icon="image-outline"></nb-icon>
+            <span>Foto</span>
+          </button>
+          <button nbButton ghost status="basic" size="small" class="action-btn">
+            <nb-icon icon="calendar-outline"></nb-icon>
+            <span>Evento</span>
+          </button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <!-- Feed de publicaciones -->
+    <div *ngFor="let post of posts" class="post-card mb-4">
+      <nb-card>
+        <nb-card-header class="post-header">
+          <div class="d-flex align-items-center">
+            <nb-user 
+              [picture]="post.user.picture" 
+              [name]="post.user.name" 
+              [title]="post.user.title"
+              size="medium">
+            </nb-user>
+            <div class="ml-auto">
+              <button nbButton ghost status="basic" size="tiny">
+                <nb-icon icon="more-horizontal-outline"></nb-icon>
+              </button>
+            </div>
+          </div>
+        </nb-card-header>
+        <nb-card-body class="post-body">
+          <p class="post-content">{{ post.content }}</p>
+          <div *ngIf="post.image" class="post-image-container">
+            <img [src]="post.image" alt="Post image" class="post-image">
+          </div>
+          <div *ngIf="post.classInfo" class="class-info-card">
+            <div class="d-flex align-items-start">
+              <div class="class-icon">
+                <nb-icon icon="video-outline"></nb-icon>
+              </div>
+              <div class="class-details">
+                <h6 class="class-title">{{ post.classInfo.title }}</h6>
+                <p class="class-description">{{ post.classInfo.description }}</p>
+                <div class="class-meta">
+                  <span class="meta-item">
+                    <nb-icon icon="calendar-outline"></nb-icon>
+                    {{ post.classInfo.date }}
+                  </span>
+                  <span class="meta-item">
+                    <nb-icon icon="map-outline"></nb-icon>
+                    {{ post.classInfo.location }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+        <nb-card-footer class="post-footer">
+          <div class="post-stats">
+            <span class="stat-item">
+              <nb-icon icon="heart-outline"></nb-icon>
+              {{ post.likes }}
+            </span>
+            <span class="stat-item">
+              <nb-icon icon="message-circle-outline"></nb-icon>
+              {{ post.comments }}
+            </span>
+            <span class="stat-item ml-auto">
+              {{ post.timeAgo }}
+            </span>
+          </div>
+          <div class="post-actions-footer">
+            <button nbButton ghost status="basic" size="small" class="action-footer-btn">
+              <nb-icon icon="heart-outline"></nb-icon>
+              <span>Me gusta</span>
+            </button>
+            <button nbButton ghost status="basic" size="small" class="action-footer-btn">
+              <nb-icon icon="message-circle-outline"></nb-icon>
+              <span>Comentar</span>
+            </button>
+            <button nbButton ghost status="basic" size="small" class="action-footer-btn">
+              <nb-icon icon="share-outline"></nb-icon>
+              <span>Compartir</span>
+            </button>
+          </div>
+        </nb-card-footer>
+      </nb-card>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-xxxl-3 col-xxl-4 col-lg-5 col-md-6">
-    <ngx-temperature></ngx-temperature>
-  </div>
+  <!-- Sidebar de sugerencias -->
+  <div class="feed-sidebar">
+    <nb-card class="suggestions-card">
+      <nb-card-header>
+        <h6 class="mb-0">Sugerencias para ti</h6>
+      </nb-card-header>
+      <nb-card-body>
+        <div *ngFor="let suggestion of suggestions" class="suggestion-item">
+          <div class="d-flex align-items-center">
+            <nb-user 
+              [picture]="suggestion.picture" 
+              [name]="suggestion.name" 
+              [title]="suggestion.title"
+              size="small">
+            </nb-user>
+            <button nbButton status="primary" size="tiny" class="ml-auto follow-btn">
+              Seguir
+            </button>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
 
-  <div class="col-xxxl-9 col-xxl-8 col-lg-7 col-md-6">
-    <ngx-electricity></ngx-electricity>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xxxl-9 col-xl-12">
-    <ngx-rooms></ngx-rooms>
-  </div>
-
-  <div class="col-xxxl-3 col-xxl-4 col-lg-7 col-md-6">
-    <ngx-contacts></ngx-contacts>
-  </div>
-
-  <div class="col-xxxl-3 col-xxl-4 col-lg-5 col-md-6">
-    <ngx-solar [chartValue]="solarValue"></ngx-solar>
-
-    <ngx-kitten></ngx-kitten>
-  </div>
-
-  <div class="col-xxxl-3 col-xxl-4 col-md-5">
-    <ngx-traffic></ngx-traffic>
-    <ngx-weather></ngx-weather>
-  </div>
-
-  <div class="col-xxxl-6 col-xxl-12 col-md-7">
-    <ngx-security-cameras></ngx-security-cameras>
+    <nb-card class="trending-card mt-3">
+      <nb-card-header>
+        <h6 class="mb-0">Tendencias</h6>
+      </nb-card-header>
+      <nb-card-body>
+        <div *ngFor="let trend of trends" class="trend-item">
+          <div class="trend-content">
+            <strong>{{ trend.title }}</strong>
+            <small class="text-muted">{{ trend.count }} publicaciones</small>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
   </div>
 </div>

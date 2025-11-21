@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [{
   path: '',
@@ -12,7 +13,11 @@ const routes: Routes = [{
   children: [
     {
       path: 'dashboard',
-      component: ECommerceComponent,
+      component: DashboardComponent,
+    },
+    {
+      path: 'profile',
+      component: ProfileComponent,
     },
     {
       path: 'iot-dashboard',
@@ -22,6 +27,36 @@ const routes: Routes = [{
       path: 'layout',
       loadChildren: () => import('./layout/layout.module')
         .then(m => m.LayoutModule),
+    },
+    {
+      path: 'explore',
+      loadChildren: () => import('./explore/explore.module')
+        .then(m => m.ExploreModule),
+    },
+    {
+      path: 'create',
+      loadChildren: () => import('./create/create.module')
+        .then(m => m.CreateModule),
+    },
+    {
+      path: 'search',
+      loadChildren: () => import('./search/search.module')
+        .then(m => m.SearchModule),
+    },
+    {
+      path: 'notifications',
+      loadChildren: () => import('./notifications/notifications.module')
+        .then(m => m.NotificationsModule),
+    },
+    {
+      path: 'saved',
+      loadChildren: () => import('./saved/saved.module')
+        .then(m => m.SavedModule),
+    },
+    {
+      path: 'clases',
+      loadChildren: () => import('./classes/classes.module')
+        .then(m => m.ClassesModule),
     },
     {
       path: 'forms',

@@ -3,7 +3,211 @@
 @import '@nebular/theme/styles/global/breakpoints';
 
 @include nb-install-component() {
-  .menu-sidebar ::ng-deep .scrollable {
-    padding-top: nb-theme(layout-padding-top);
+  .menu-sidebar {
+    ::ng-deep .scrollable {
+      padding-top: 0;
+    }
+
+    // Estilos globales para cuando está colapsado - aplicar primero
+    &.collapsed {
+      ::ng-deep {
+        // Forzar que todos los textos del menú estén ocultos
+        .menu-title,
+        span.menu-title {
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+          width: 0 !important;
+          height: 0 !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          overflow: hidden !important;
+          font-size: 0 !important;
+          line-height: 0 !important;
+        }
+      }
+    }
+
+    .sidebar-profile {
+      padding: 1.25rem;
+      border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(168, 85, 247, 0.05);
+      }
+
+      nb-user {
+        ::ng-deep .user-container {
+          .user-name {
+            font-weight: 600;
+            font-size: 1rem;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+          }
+        }
+      }
+    }
+
+    ::ng-deep nb-menu {
+      .menu-items {
+        .menu-item {
+          margin: 0.25rem 0.5rem;
+          border-radius: 8px;
+          transition: all 0.2s;
+
+          &:hover {
+            background: rgba(168, 85, 247, 0.1);
+          }
+
+          &.selected {
+            background: rgba(168, 85, 247, 0.2);
+            
+            .menu-icon {
+              color: #a855f7;
+            }
+          }
+
+          .menu-title {
+            font-size: 0.95rem;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+          }
+        }
+      }
+    }
+
+    // Estilos cuando el sidebar está colapsado - Iconos a la izquierda
+    &.collapsed {
+      overflow: hidden !important;
+
+      .sidebar-profile {
+        padding: 1rem 0.5rem !important;
+        display: flex !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        overflow: hidden !important;
+
+        nb-user {
+          ::ng-deep {
+            .user-container {
+              flex-direction: row !important;
+              align-items: center !important;
+              justify-content: flex-start !important;
+              width: 100% !important;
+              overflow: hidden !important;
+
+              .user-picture {
+                width: 2rem !important;
+                height: 2rem !important;
+                margin: 0 !important;
+                flex-shrink: 0 !important;
+              }
+
+              .user-name,
+              .user-title,
+              .user-initials {
+                display: none !important;
+                width: 0 !important;
+                overflow: hidden !important;
+              }
+            }
+          }
+        }
+      }
+
+      ::ng-deep {
+        nb-menu {
+          .menu-items {
+            .menu-item {
+              display: flex !important;
+              justify-content: flex-start !important;
+              align-items: center !important;
+              padding: 0.75rem 0.5rem !important;
+              margin: 0.25rem 0.25rem !important;
+              overflow: hidden !important;
+
+              a {
+                display: flex !important;
+                justify-content: flex-start !important;
+                align-items: center !important;
+                width: 100% !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+              }
+
+              // Iconos a la izquierda - tamaño normal
+              .menu-icon,
+              nb-icon {
+                margin: 0 !important;
+                flex-shrink: 0 !important;
+                // NO cambiar el tamaño, dejarlo normal
+              }
+
+              // El texto queda fuera del área visible
+              .menu-title {
+                display: none !important;
+                width: 0 !important;
+                overflow: hidden !important;
+                opacity: 0 !important;
+              }
+
+              .expand-state {
+                display: none !important;
+              }
+            }
+
+            // Ocultar grupos
+            .menu-group {
+              display: none !important;
+              
+              .menu-group-title {
+                display: none !important;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Estilos cuando el sidebar está expandido
+    &:not(.collapsed) {
+      .sidebar-profile {
+        nb-user {
+          ::ng-deep .user-container {
+            flex-direction: row;
+            align-items: center;
+
+            .user-name {
+              display: block !important;
+              visibility: visible !important;
+              opacity: 1 !important;
+              margin-left: 0.75rem;
+            }
+          }
+        }
+      }
+
+      ::ng-deep nb-menu {
+        .menu-items {
+          .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+
+            .menu-icon {
+              margin-right: 0.75rem;
+            }
+
+            .menu-title {
+              display: block !important;
+              visibility: visible !important;
+              opacity: 1 !important;
+              width: auto !important;
+              height: auto !important;
+            }
+          }
+        }
+      }
+    }
   }
 }

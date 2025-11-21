@@ -1,0 +1,45 @@
+<div class="explore-page">
+  <div class="explore-hero">
+    <div>
+      <h1>Explora nuevas vibras</h1>
+      <p>Encuentra clases, shows y música fresca de la comunidad Groovia.</p>
+    </div>
+    <button nbButton status="primary" ghost>
+      <nb-icon icon="funnel-outline"></nb-icon>
+      Filtros
+    </button>
+  </div>
+
+  <div class="tags-wrapper">
+    <div class="tag-card" *ngFor="let tag of tags">
+      <div class="tag-emoji">{{ tag.emoji }}</div>
+      <div class="tag-info">
+        <strong>{{ tag.label }}</strong>
+        <span>{{ tag.count }}</span>
+      </div>
+      <nb-icon icon="chevron-right-outline"></nb-icon>
+    </div>
+  </div>
+
+  <div class="posts-header">
+    <h3>Publicaciones destacadas</h3>
+    <span>Historias falsas para inspirar el diseño 😎</span>
+  </div>
+
+  <div class="posts-grid">
+    <div class="post-card" *ngFor="let post of posts">
+      <div class="post-image" [style.background-image]="'url(' + post.image + ')'">
+        <span class="post-tag">{{ post.tag }}</span>
+      </div>
+      <div class="post-body">
+        <strong>{{ post.title }}</strong>
+        <p>{{ post.location }}</p>
+        <div class="post-meta">
+          <span><nb-icon icon="heart-outline"></nb-icon> 1.2K</span>
+          <span><nb-icon icon="message-circle-outline"></nb-icon> 86</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

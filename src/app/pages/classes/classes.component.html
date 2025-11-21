@@ -1,0 +1,30 @@
+<div class="classes-page">
+  <div class="classes-header">
+    <h1>Mis clases registradas</h1>
+    <p>Consulta duración, nivel y si recibirás certificado.</p>
+  </div>
+
+  <div class="classes-list">
+    <nb-card *ngFor="let item of registeredClasses" class="class-card">
+      <nb-card-body>
+        <div class="class-main">
+          <h4>{{ item.title }}</h4>
+          <span class="studio">{{ item.studio }}</span>
+          <div class="meta">
+            <span><nb-icon icon="calendar-outline"></nb-icon> {{ item.date }}</span>
+            <span><nb-icon icon="clock-outline"></nb-icon> {{ item.duration }}</span>
+            <span><nb-icon icon="star-outline"></nb-icon> {{ item.level }}</span>
+          </div>
+        </div>
+        <div class="class-side">
+          <span class="certificate" [class.active]="item.certificate">
+            <nb-icon icon="award-outline"></nb-icon>
+            {{ item.certificate ? 'Incluye certificado' : 'Sin certificado' }}
+          </span>
+          <button nbButton size="small" status="primary" ghost>Ver detalles</button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+

@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     },
     {
       value: 'dark',
-      name: 'Dark',
+      name: 'Groovia',
     },
     {
       value: 'cosmic',
@@ -36,9 +36,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     },
   ];
 
-  currentTheme = 'default';
-
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  currentTheme = 'dark';
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -91,4 +89,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.navigateHome();
     return false;
   }
+
 }

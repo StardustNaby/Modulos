@@ -2,18 +2,63 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'E-commerce',
-    icon: 'shopping-cart-outline',
+    title: 'Inicio',
+    icon: 'home-outline',
     link: '/pages/dashboard',
     home: true,
   },
   {
-    title: 'IoT Dashboard',
-    icon: 'home-outline',
-    link: '/pages/iot-dashboard',
+    title: 'Búsqueda',
+    icon: 'search-outline',
+    link: '/pages/search',
   },
   {
-    title: 'FEATURES',
+    title: 'Explorar',
+    icon: 'compass-outline',
+    link: '/pages/explore',
+  },
+  {
+    title: 'Notificaciones',
+    icon: 'bell-outline',
+    link: '/pages/notifications',
+  },
+  {
+    title: 'Crear',
+    icon: 'plus-circle-outline',
+    link: '/pages/create',
+  },
+  {
+    title: 'Mi Perfil',
+    icon: 'person-outline',
+    link: '/pages/profile',
+  },
+  {
+    title: 'Guardado',
+    icon: 'bookmark-outline',
+    link: '/pages/saved',
+  },
+  {
+    title: 'Clases',
+    icon: 'video-outline',
+    link: '/pages/clases',
+  },
+  {
+    title: 'Academias',
+    icon: 'star-outline',
+    link: '/pages/academias',
+  },
+  {
+    title: 'Eventos',
+    icon: 'calendar-outline',
+    link: '/pages/eventos',
+  },
+  {
+    title: 'Configuración',
+    icon: 'settings-outline',
+    link: '/pages/settings',
+  },
+  {
+    title: 'MÁS',
     group: true,
   },
   {

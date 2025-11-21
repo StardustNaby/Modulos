@@ -1,12 +1,23 @@
-import {Component, OnDestroy} from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators' ;
-import { SolarData } from '../../@core/data/solar';
+import { Component, OnInit } from '@angular/core';
 
-interface CardSettings {
-  title: string;
-  iconClass: string;
-  type: string;
+interface Post {
+  id: number;
+  user: {
+    name: string;
+    picture: string;
+    title: string;
+  };
+  content: string;
+  image?: string;
+  classInfo?: {
+    title: string;
+    description: string;
+    date: string;
+    location: string;
+  };
+  likes: number;
+  comments: number;
+  timeAgo: string;
 }
 
 @Component({
@@ -14,86 +25,115 @@ interface CardSettings {
   styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnInit {
 
-  private alive = true;
-
-  solarValue: number;
-  lightCard: CardSettings = {
-    title: 'Light',
-    iconClass: 'nb-lightbulb',
-    type: 'primary',
-  };
-  rollerShadesCard: CardSettings = {
-    title: 'Roller Shades',
-    iconClass: 'nb-roller-shades',
-    type: 'success',
-  };
-  wirelessAudioCard: CardSettings = {
-    title: 'Wireless Audio',
-    iconClass: 'nb-audio',
-    type: 'info',
-  };
-  coffeeMakerCard: CardSettings = {
-    title: 'Coffee Maker',
-    iconClass: 'nb-coffee-maker',
-    type: 'warning',
+  currentUser = {
+    name: 'Tu Nombre',
+    picture: 'https://i.pravatar.cc/150?img=12',
   };
 
-  statusCards: string;
-
-  commonStatusCardsSet: CardSettings[] = [
-    this.lightCard,
-    this.rollerShadesCard,
-    this.wirelessAudioCard,
-    this.coffeeMakerCard,
+  posts: Post[] = [
+    {
+      id: 1,
+      user: {
+        name: 'María García',
+        picture: 'https://i.pravatar.cc/150?img=1',
+        title: 'Instructora de Salsa'
+      },
+      content: '¡Clase de salsa este sábado! Ven a aprender los pasos básicos y diviértete bailando. Todos los niveles son bienvenidos 🕺💃',
+      classInfo: {
+        title: 'Clase de Salsa para Principiantes',
+        description: 'Aprende los fundamentos de la salsa en un ambiente divertido y acogedor',
+        date: 'Sábado 25 Nov, 6:00 PM',
+        location: 'Academia de Baile Ritmo Latino'
+      },
+      likes: 24,
+      comments: 8,
+      timeAgo: 'Hace 2 horas'
+    },
+    {
+      id: 2,
+      user: {
+        name: 'Academia Dance Studio',
+        picture: 'https://i.pravatar.cc/150?img=2',
+        title: 'Academia de Baile'
+      },
+      content: '¡Nuevo evento! Festival de Baile Urbano este fin de semana. No te lo pierdas 🎉',
+      image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800',
+      likes: 156,
+      comments: 32,
+      timeAgo: 'Hace 5 horas'
+    },
+    {
+      id: 3,
+      user: {
+        name: 'Carlos Rodríguez',
+        picture: 'https://i.pravatar.cc/150?img=3',
+        title: 'Bailarín Profesional'
+      },
+      content: 'Acabo de terminar una increíble sesión de bachata. La música y el baile me llenan de energía. ¿Alguien más siente lo mismo? 💜',
+      likes: 89,
+      comments: 15,
+      timeAgo: 'Hace 1 día'
+    },
+    {
+      id: 4,
+      user: {
+        name: 'Estudio de Danza Contemporánea',
+        picture: 'https://i.pravatar.cc/150?img=4',
+        title: 'Academia'
+      },
+      content: 'Abiertas las inscripciones para nuestro curso intensivo de danza contemporánea. Clases personalizadas y grupos reducidos.',
+      classInfo: {
+        title: 'Curso Intensivo de Danza Contemporánea',
+        description: 'Explora tu expresión artística a través del movimiento',
+        date: 'Lunes a Viernes, 7:00 PM',
+        location: 'Estudio de Danza Contemporánea'
+      },
+      likes: 67,
+      comments: 12,
+      timeAgo: 'Hace 2 días'
+    }
   ];
 
-  statusCardsByThemes: {
-    default: CardSettings[];
-    cosmic: CardSettings[];
-    corporate: CardSettings[];
-    dark: CardSettings[];
-  } = {
-    default: this.commonStatusCardsSet,
-    cosmic: this.commonStatusCardsSet,
-    corporate: [
-      {
-        ...this.lightCard,
-        type: 'warning',
-      },
-      {
-        ...this.rollerShadesCard,
-        type: 'primary',
-      },
-      {
-        ...this.wirelessAudioCard,
-        type: 'danger',
-      },
-      {
-        ...this.coffeeMakerCard,
-        type: 'info',
-      },
-    ],
-    dark: this.commonStatusCardsSet,
-  };
+  suggestions = [
+    {
+      name: 'Ana Martínez',
+      picture: 'https://i.pravatar.cc/150?img=5',
+      title: 'Instructora de Bachata'
+    },
+    {
+      name: 'Dance Academy Pro',
+      picture: 'https://i.pravatar.cc/150?img=6',
+      title: 'Academia'
+    },
+    {
+      name: 'Roberto Silva',
+      picture: 'https://i.pravatar.cc/150?img=7',
+      title: 'Coreógrafo'
+    },
+    {
+      name: 'Salsa Nights',
+      picture: 'https://i.pravatar.cc/150?img=8',
+      title: 'Eventos'
+    }
+  ];
 
-  constructor(private themeService: NbThemeService,
-              private solarService: SolarData) {
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.statusCards = this.statusCardsByThemes[theme.name];
-    });
+  trends = [
+    { title: '#SalsaNights', count: '2.5K' },
+    { title: '#BachataWeekend', count: '1.8K' },
+    { title: '#DanceClass', count: '3.2K' },
+    { title: '#GrooviaEvents', count: '890' }
+  ];
 
-    this.solarService.getSolarData()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((data) => {
-        this.solarValue = data;
-      });
+  openCreatePost() {
+    // Aquí se abriría un modal para crear publicación
+    console.log('Abrir modal de crear publicación');
   }
 
-  ngOnDestroy() {
-    this.alive = false;
+  constructor() {
+  }
+
+  ngOnInit() {
   }
 }

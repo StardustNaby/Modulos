@@ -1,0 +1,36 @@
+<div class="saved-page">
+  <div class="saved-header">
+    <div>
+      <h1>Guardado</h1>
+      <p>Mantén tus vibes favoritas a un toque de distancia.</p>
+    </div>
+    <div class="collections">
+      <button
+        nbButton
+        size="small"
+        ghost
+        *ngFor="let collection of collections"
+        [class.active]="collection === selectedCollection"
+        (click)="selectedCollection = collection">
+        {{ collection }}
+      </button>
+    </div>
+  </div>
+
+  <div class="saved-grid">
+    <div class="saved-card" *ngFor="let post of savedPosts">
+      <div class="cover" [style.background-image]="'url(' + post.cover + ')'">
+        <span class="tag">{{ post.tag }}</span>
+      </div>
+      <div class="body">
+        <h4>{{ post.title }}</h4>
+        <p>{{ post.creator }} · {{ post.vibes }}</p>
+        <div class="actions">
+          <button nbButton size="tiny" status="primary" ghost>Ver detalle</button>
+          <button nbButton size="tiny" status="basic" ghost>Compartir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

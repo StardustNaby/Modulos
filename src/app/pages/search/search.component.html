@@ -1,0 +1,56 @@
+<div class="search-page">
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Encuentra clases, eventos y coaches</h1>
+      <p>Busca por estilo, ciudad o comunidad. Inspirado en la vibra de Instagram, pero hecho para baile.</p>
+      <div class="search-bar" [class.loading]="isSearching" [class.focused]="searchFocused">
+        <nb-icon icon="search-outline"></nb-icon>
+        <input
+          placeholder="Busca academias, clases, coaches o hashtags..."
+          [(ngModel)]="query"
+          (focus)="onFocus()"
+          (blur)="onBlur()"
+          (keyup.enter)="startSearch()">
+        <button nbButton status="primary" (click)="startSearch()">Buscar</button>
+      </div>
+      <div class="chips">
+        <button nbButton ghost size="tiny">#heels</button>
+        <button nbButton ghost size="tiny">#grooviaevents</button>
+        <button nbButton ghost size="tiny">#bachatapro</button>
+        <button nbButton ghost size="tiny">Clases cerca</button>
+      </div>
+    </div>
+    <div class="animation">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+      <div class="pulse pulse-1"></div>
+      <div class="pulse pulse-2"></div>
+    </div>
+  </div>
+
+  <div class="trending-section" [class.dimmed]="searchFocused">
+    <div class="section-header">
+      <h3>Tendencia ahora</h3>
+      <span>Lo que la comunidad está compartiendo</span>
+    </div>
+    <div class="trending-grid">
+      <div class="trend-card" *ngFor="let post of trendingPosts">
+        <div class="trend-cover" [style.background-image]="'url(' + post.cover + ')'">
+          <span class="trend-tag">{{ post.tag }}</span>
+        </div>
+        <div class="trend-body">
+          <div class="trend-user">
+            <strong>{{ post.user }}</strong>
+            <span>{{ post.handle }}</span>
+          </div>
+          <p>{{ post.description }}</p>
+          <div class="trend-meta">
+            <span><nb-icon icon="heart-outline"></nb-icon> {{ post.likes }}</span>
+            <span><nb-icon icon="message-circle-outline"></nb-icon> {{ post.comments }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

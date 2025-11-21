@@ -1,0 +1,25 @@
+<div class="notifications-page">
+  <div class="notifications-hero">
+    <h1>Notificaciones</h1>
+    <p>Todo lo nuevo de tus academias, eventos y coaches favoritos.</p>
+  </div>
+
+  <div class="notifications-feed">
+    <nb-card *ngFor="let notification of notifications" class="notification-card" [ngClass]="notification.type">
+      <nb-card-body>
+        <div class="icon-wrapper">
+          <nb-icon [icon]="notification.icon"></nb-icon>
+        </div>
+        <div class="notification-content">
+          <div class="title-row">
+            <strong>{{ notification.title }}</strong>
+            <span>{{ notification.time }}</span>
+          </div>
+          <p>{{ notification.description }}</p>
+        </div>
+        <button nbButton ghost size="small">Ver más</button>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+

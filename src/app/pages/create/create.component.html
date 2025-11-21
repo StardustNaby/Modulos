@@ -1,0 +1,114 @@
+<div class="create-page">
+  <div class="create-hero">
+    <div>
+      <h1>Crear contenido</h1>
+      <p>Elige el formato y comparte tu próxima vibra.</p>
+    </div>
+    <div class="hashtags">
+      <span>Trending:</span>
+      <div class="pills">
+        <span class="pill" *ngFor="let tag of trendingHashtags">{{ tag }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="create-layout">
+    <div class="composer">
+      <nb-card>
+        <nb-card-header>
+          <nb-user [name]="'Groovia Coach'" size="small"></nb-user>
+          <span class="type">{{ selectedType.label }}</span>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="option-grid">
+            <button
+              nbButton
+              size="small"
+              ghost
+              *ngFor="let option of options"
+              [class.active]="option === selectedType"
+              (click)="selectedType = option">
+              <nb-icon [icon]="option.icon"></nb-icon>
+              {{ option.label }}
+            </button>
+          </div>
+
+          <textarea
+            placeholder="¿Qué quieres compartir hoy?"
+            [(ngModel)]="caption"
+            rows="4">
+          </textarea>
+
+          <input
+            type="text"
+            placeholder="Ubicación / enlace"
+            [(ngModel)]="location">
+          <div class="price-row" *ngIf="showPrice">
+            <input
+              type="text"
+              placeholder="Establece un precio (ej. 25 USD)"
+              [(ngModel)]="price">
+          </div>
+
+          <div class="actions-row">
+            <button nbButton status="primary">Publicar</button>
+            <button nbButton ghost>Guardar borrador</button>
+            <button nbButton outline status="primary" (click)="showPrice = !showPrice">
+              {{ showPrice ? 'Ocultar precio' : 'Establecer precio' }}
+            </button>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <div class="side-panel">
+      <nb-card>
+        <nb-card-header>
+          <nb-icon icon="compass-outline"></nb-icon>
+          Spot en el mapa
+        </nb-card-header>
+        <nb-card-body>
+          <p>Marca el lugar de tu clase o evento. Esto ayuda a la gente a encontrarte.</p>
+          <div class="map-placeholder">
+            <nb-icon icon="pin-outline"></nb-icon>
+            <span>Mapa de Groovia</span>
+          </div>
+          <button nbButton size="small" status="primary" ghost>Agregar ubicación</button>
+        </nb-card-body>
+      </nb-card>
+
+      <nb-card>
+        <nb-card-header>
+          Calendario rápido
+        </nb-card-header>
+        <nb-card-body>
+          <div class="calendar-grid">
+            <div
+              class="calendar-day"
+              *ngFor="let day of calendarWeek"
+              [class.busy]="day.status === 'busy'">
+              <span class="day-label">{{ day.day }}</span>
+              <span class="day-date">{{ day.date }}</span>
+              <small *ngIf="day.status === 'busy'">{{ day.label }}</small>
+              <small *ngIf="day.status !== 'busy'">Disponible</small>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+
+      <nb-card>
+        <nb-card-header>
+          Ideas rápidas
+        </nb-card-header>
+        <nb-card-body>
+          <ul>
+            <li>Comparte un teaser de tu coreografía.</li>
+            <li>Anuncia cupos libres para clases privadas.</li>
+            <li>Invita a un nuevo coach a tu evento.</li>
+          </ul>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>
+

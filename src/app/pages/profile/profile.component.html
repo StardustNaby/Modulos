@@ -1,0 +1,112 @@
+<div class="profile-page">
+  <div class="profile-cover" [style.background]="user.cover"></div>
+
+  <div class="profile-body">
+    <div class="profile-main">
+      <nb-card class="profile-card">
+        <nb-card-body>
+          <div class="profile-info">
+            <div class="avatar">
+              <img [src]="user.avatar" alt="avatar">
+            </div>
+            <div class="details">
+              <div class="title-row">
+                <h2>{{ user.name }}</h2>
+                <span class="username">@{{ user.username }}</span>
+                <span class="badge">{{ user.badge }}</span>
+              </div>
+              <div class="action-row">
+                <button nbButton status="primary" size="small">Editar perfil</button>
+                <button nbButton ghost status="primary" size="small">Compartir perfil</button>
+                <button nbButton outline status="basic" size="small">
+                  <nb-icon icon="settings-2-outline"></nb-icon>
+                </button>
+              </div>
+              <div class="stats-row">
+                <div class="stat" *ngFor="let stat of stats">
+                  <strong>{{ stat.value }}</strong>
+                  <span>{{ stat.label }}</span>
+                </div>
+              </div>
+              <div class="bio">
+                <p class="quote">{{ user.bio }}</p>
+                <ul>
+                  <li>
+                    <nb-icon icon="map-outline"></nb-icon>
+                    {{ user.location }}
+                  </li>
+                  <li>
+                    <nb-icon icon="at-outline"></nb-icon>
+                    {{ user.contact }}
+                  </li>
+                  <li>
+                    <nb-icon icon="home-outline"></nb-icon>
+                    {{ user.academy }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+
+      <div class="highlights">
+        <div class="highlight" *ngFor="let highlight of highlights" [style.border-color]="highlight.color">
+          <div class="highlight-icon" [style.background]="highlight.color">
+            <nb-icon [icon]="highlight.icon"></nb-icon>
+          </div>
+          <span>{{ highlight.label }}</span>
+        </div>
+      </div>
+
+      <div class="profile-tabs">
+        <button class="tab active">
+          <nb-icon icon="grid-outline"></nb-icon> Publicaciones
+        </button>
+        <button class="tab">
+          <nb-icon icon="bookmark-outline"></nb-icon> Guardado
+        </button>
+        <button class="tab">
+          <nb-icon icon="person-outline"></nb-icon> Etiquetado
+        </button>
+      </div>
+
+      <div class="posts-grid">
+        <div class="post-card" *ngFor="let post of posts">
+          <div class="post-image" [style.background-image]="'url(' + post.image + ')'"></div>
+          <div class="post-info">
+            <strong>{{ post.title }}</strong>
+            <small>{{ post.meta }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-side">
+      <nb-card class="history-card">
+        <nb-card-header>
+          <div class="header-title">
+            <nb-icon icon="clock-outline"></nb-icon>
+            Historial destacado
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="history-item" *ngFor="let item of history">
+            <span class="history-tag">{{ item.tag }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </div>
+        </nb-card-body>
+      </nb-card>
+
+      <nb-card class="cta-card">
+        <nb-card-body>
+          <h5>Agenda una clase privada</h5>
+          <p>Reserva sesiones personalizadas de heels, bachata o ritmos urbanos.</p>
+          <button nbButton status="primary" fullWidth>Enviar solicitud</button>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>
+
