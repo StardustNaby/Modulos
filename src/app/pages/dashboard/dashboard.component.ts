@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 interface Post {
   id: number;
@@ -25,7 +25,7 @@ interface Post {
   styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
   currentUser = {
     name: 'Tu Nombre',
@@ -131,9 +131,4 @@ export class DashboardComponent implements OnInit {
     console.log('Abrir modal de crear publicación');
   }
 
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
 }
