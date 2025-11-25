@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 interface SavedPost {
   cover: string;
@@ -12,6 +13,14 @@ interface SavedPost {
   selector: 'ngx-saved-page',
   templateUrl: './saved.component.html',
   styleUrls: ['./saved.component.scss'],
+  animations: [
+    trigger('pageAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class SavedComponent {
   collections = ['Clases favoritas', 'Eventos soñados', 'Inspiración musical'];

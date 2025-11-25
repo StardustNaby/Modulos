@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 interface TrendingPost {
   user: string;
@@ -14,6 +15,24 @@ interface TrendingPost {
   selector: 'ngx-search-page',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
+  animations: [
+    trigger('pageAnimation', [
+      transition(':enter', [
+        query('.search-container', [
+          style({ opacity: 0, transform: 'scale(0.9)' }),
+          animate('500ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
+        ], { optional: true }),
+        query('.trending-post', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(100, animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })))
+        ], { optional: true }),
+        query('.trend-card', [
+          style({ opacity: 0, transform: 'translateY(30px) scale(0.95)' }),
+          stagger(80, animate('600ms ease-out', style({ opacity: 1, transform: 'translateY(0) scale(1)' })))
+        ], { optional: true }),
+      ])
+    ])
+  ]
 })
 export class SearchComponent {
   query = '';

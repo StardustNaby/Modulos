@@ -1,0 +1,44 @@
+<div class="academias-container" [@pageAnimation]>
+  <nb-card>
+    <nb-card-header>
+      <h3>Mis Academias Registradas</h3>
+    </nb-card-header>
+    <nb-card-body>
+      <div *ngIf="academias.length === 0" class="no-academias">
+        <nb-icon icon="star-outline" status="hint" class="mb-3"></nb-icon>
+        <p>Aún no te has registrado en ninguna academia.</p>
+        <button nbButton status="primary">Explorar Academias</button>
+      </div>
+
+      <div *ngFor="let academia of academias" class="academia-item">
+        <img [src]="academia.picture" alt="Academia Image" class="academia-image">
+        <div class="academia-details">
+          <div class="academia-header">
+            <h4>{{ academia.name }}</h4>
+            <div class="rating">
+              <nb-icon icon="star" [status]="'warning'"></nb-icon>
+              <span>{{ academia.rating }}</span>
+            </div>
+          </div>
+          <p class="location"><nb-icon icon="pin-outline"></nb-icon> {{ academia.location }}</p>
+          <p class="description">{{ academia.description }}</p>
+          <div class="specialties">
+            <nb-tag *ngFor="let specialty of academia.specialties" status="info" size="small">
+              {{ specialty }}
+            </nb-tag>
+          </div>
+          <div class="academia-meta">
+            <span class="meta-item"><nb-icon icon="people-outline"></nb-icon> {{ academia.students }} estudiantes</span>
+            <span class="meta-item registered-date">{{ academia.registeredSince }}</span>
+          </div>
+        </div>
+        <div class="academia-actions">
+          <button nbButton ghost status="primary" size="small">
+            <nb-icon icon="eye-outline"></nb-icon> Ver
+          </button>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+

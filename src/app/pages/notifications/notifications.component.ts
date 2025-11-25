@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 interface NotificationItem {
   icon: string;
@@ -12,6 +13,14 @@ interface NotificationItem {
   selector: 'ngx-notifications-page',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
+  animations: [
+    trigger('pageAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class NotificationsComponent {
   notifications: NotificationItem[] = [

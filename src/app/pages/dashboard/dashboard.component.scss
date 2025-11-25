@@ -9,6 +9,8 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 1rem;
+    background: nb-theme(background-basic-color-1);
+    min-height: calc(100vh - 4rem);
   }
 
   .feed-main {
@@ -19,12 +21,24 @@
   .feed-sidebar {
     width: 300px;
     flex-shrink: 0;
+
+    @include media-breakpoint-down(lg) {
+      display: none;
+    }
   }
 
   // Crear publicación
-  .create-post-card {
+  ::ng-deep .create-post-card {
+    nb-card {
+      background: nb-theme(background-basic-color-2);
+      border: 1px solid nb-theme(border-basic-color-3);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
     nb-card-body {
       padding: 1rem;
+      background: transparent;
     }
   }
 
@@ -32,27 +46,25 @@
     flex: 1;
     margin-left: 0.75rem;
     padding: 0.75rem 1rem;
-    background: rgba(30, 27, 46, 0.6);
-    border: 1px solid rgba(168, 85, 247, 0.2);
+    background: nb-theme(background-basic-color-1);
+    border: 1px solid nb-theme(border-basic-color-3);
     border-radius: 20px;
-    color: rgba(255, 255, 255, 0.8);
+    color: nb-theme(text-basic-color);
     font-size: 0.9rem;
     outline: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 
     &:hover {
-      border-color: rgba(168, 85, 247, 0.4);
-      background: rgba(30, 27, 46, 0.8);
+      border-color: nb-theme(border-basic-color-4);
     }
 
     &:focus {
-      border-color: #a855f7;
-      background: rgba(30, 27, 46, 0.9);
-      color: white;
+      border-color: nb-theme(border-basic-color-4);
+      background: nb-theme(background-basic-color-2);
     }
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.5);
+      color: nb-theme(text-hint-color);
     }
   }
 
@@ -60,7 +72,7 @@
     display: flex;
     justify-content: space-around;
     padding-top: 0.75rem;
-    border-top: 1px solid rgba(168, 85, 247, 0.1);
+    border-top: 1px solid nb-theme(border-basic-color-3);
   }
 
   .action-btn {
@@ -70,31 +82,53 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    color: nb-theme(text-hint-color);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: nb-theme(text-basic-color);
+    }
   }
 
   // Publicaciones
-  .post-card {
+  ::ng-deep .post-card {
     nb-card {
-      border: 1px solid rgba(168, 85, 247, 0.1);
-      border-radius: 12px;
+      background: nb-theme(background-basic-color-2);
+      border: 1px solid nb-theme(border-basic-color-3);
+      border-radius: 8px;
       overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1rem;
     }
   }
 
   .post-header {
     padding: 1rem;
-    border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+    border-bottom: 1px solid nb-theme(border-basic-color-3);
+    background: nb-theme(background-basic-color-2);
+
+    ::ng-deep nb-card-header {
+      background: nb-theme(background-basic-color-2);
+      border-bottom: 1px solid nb-theme(border-basic-color-3);
+    }
   }
 
   .post-body {
     padding: 0;
+    background: transparent;
+
+    ::ng-deep nb-card-body {
+      background: nb-theme(background-basic-color-2);
+      padding: 0;
+    }
   }
 
   .post-content {
     padding: 1rem;
     margin: 0;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
+    color: nb-theme(text-basic-color);
+    font-size: 0.95rem;
   }
 
   .post-image-container {
@@ -111,9 +145,9 @@
   .class-info-card {
     margin: 1rem;
     padding: 1rem;
-    background: rgba(168, 85, 247, 0.1);
+    background: nb-theme(background-basic-color-3);
     border-radius: 8px;
-    border-left: 3px solid #a855f7;
+    border: 1px solid nb-theme(border-basic-color-3);
   }
 
   .class-icon {
@@ -122,14 +156,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(168, 85, 247, 0.2);
+    background: nb-theme(background-basic-color-1);
     border-radius: 8px;
     margin-right: 0.75rem;
     flex-shrink: 0;
 
     nb-icon {
       font-size: 20px;
-      color: #a855f7;
+      color: nb-theme(text-hint-color);
     }
   }
 
@@ -141,13 +175,13 @@
     margin: 0 0 0.5rem 0;
     font-size: 1rem;
     font-weight: 600;
-    color: white;
+    color: nb-theme(text-basic-color);
   }
 
   .class-description {
     margin: 0 0 0.75rem 0;
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: nb-theme(text-hint-color);
   }
 
   .class-meta {
@@ -161,16 +195,23 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: nb-theme(text-hint-color);
 
     nb-icon {
       font-size: 14px;
+      color: nb-theme(text-hint-color);
     }
   }
 
   .post-footer {
     padding: 0.75rem 1rem;
-    border-top: 1px solid rgba(168, 85, 247, 0.1);
+    border-top: 1px solid nb-theme(border-basic-color-3);
+    background: nb-theme(background-basic-color-2);
+
+    ::ng-deep nb-card-footer {
+      background: nb-theme(background-basic-color-2);
+      border-top: 1px solid nb-theme(border-basic-color-3);
+    }
   }
 
   .post-stats {
@@ -179,7 +220,7 @@
     gap: 1rem;
     padding-bottom: 0.75rem;
     margin-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+    border-bottom: 1px solid nb-theme(border-basic-color-3);
   }
 
   .stat-item {
@@ -187,10 +228,12 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: nb-theme(text-hint-color);
+    font-weight: 500;
 
     nb-icon {
       font-size: 18px;
+      color: nb-theme(text-hint-color);
     }
   }
 
@@ -205,30 +248,58 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    color: nb-theme(text-hint-color);
+    font-weight: 500;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: nb-theme(text-basic-color);
+    }
+
+    nb-icon {
+      color: nb-theme(text-hint-color);
+    }
   }
 
   // Sidebar
-  .suggestions-card,
-  .trending-card {
+  ::ng-deep .suggestions-card,
+  ::ng-deep .trending-card {
+    nb-card {
+      background: nb-theme(background-basic-color-2);
+      border: 1px solid nb-theme(border-basic-color-3);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
     nb-card-header {
       padding: 1rem;
-      border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+      border-bottom: 1px solid nb-theme(border-basic-color-3);
+      background: nb-theme(background-basic-color-3);
 
       h6 {
         font-size: 0.9rem;
         font-weight: 600;
-        color: white;
+        color: nb-theme(text-basic-color);
+        margin: 0;
       }
     }
 
     nb-card-body {
       padding: 0.75rem;
+      background: transparent;
     }
   }
 
   .suggestion-item {
     padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(168, 85, 247, 0.05);
+    border-bottom: 1px solid nb-theme(border-basic-color-3);
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: nb-theme(background-basic-color-3);
+    }
 
     &:last-child {
       border-bottom: none;
@@ -238,17 +309,26 @@
   .follow-btn {
     padding: 0.25rem 0.75rem;
     font-size: 0.8rem;
+    border-radius: 4px;
+    background: nb-theme(color-primary-500);
+    border: none;
+    color: white;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: nb-theme(color-primary-600);
+    }
   }
 
   .trend-item {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(168, 85, 247, 0.05);
+    padding: 0.75rem;
+    border-bottom: 1px solid nb-theme(border-basic-color-3);
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background-color 0.2s ease;
 
     &:hover {
-      background: rgba(168, 85, 247, 0.05);
-      border-radius: 4px;
+      background: nb-theme(background-basic-color-3);
     }
 
     &:last-child {
@@ -262,12 +342,14 @@
     gap: 0.25rem;
 
     strong {
-      color: #a855f7;
+      color: nb-theme(text-basic-color);
       font-size: 0.9rem;
+      font-weight: 600;
     }
 
     small {
       font-size: 0.75rem;
+      color: nb-theme(text-hint-color);
     }
   }
 
@@ -317,23 +399,6 @@
   }
 
   .text-muted {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  @include media-breakpoint-down(lg) {
-    .feed-sidebar {
-      display: none;
-    }
-  }
-
-  @include media-breakpoint-down(sm) {
-    .feed-container {
-      padding: 0.5rem;
-    }
-
-    .post-actions-footer {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
+    color: nb-theme(text-hint-color);
   }
 }

@@ -1,0 +1,64 @@
+<div class="eventos-container" [@pageAnimation]>
+  <nb-card>
+    <nb-card-header>
+      <div class="header-content">
+        <h3>Próximos Eventos Registrados</h3>
+        <button nbButton status="primary" size="small" (click)="toggleCalendar()">
+          <nb-icon [icon]="showCalendar ? 'calendar-outline' : 'calendar'"></nb-icon>
+          {{ showCalendar ? 'Ocultar' : 'Mostrar' }} Calendario
+        </button>
+      </div>
+    </nb-card-header>
+    
+    <nb-card-body>
+      <!-- Calendario -->
+      <div *ngIf="showCalendar" class="calendar-section">
+        <nb-calendar 
+          [(date)]="selectedDate" 
+          [boundingMonth]="true"
+          (dateChange)="onDateSelect($event)">
+        </nb-calendar>
+      </div>
+
+      <!-- Lista de eventos -->
+      <div *ngIf="upcomingEvents.length === 0" class="no-eventos">
+        <nb-icon icon="calendar-outline" status="hint" class="mb-3"></nb-icon>
+        <p>No tienes eventos registrados próximamente.</p>
+        <button nbButton status="primary">Explorar Eventos</button>
+      </div>
+
+      <div *ngFor="let evento of upcomingEvents" class="evento-item">
+        <img [src]="evento.image" alt="Evento Image" class="evento-image">
+        <div class="evento-details">
+          <div class="evento-header">
+            <h4>{{ evento.title }}</h4>
+            <nb-tag [status]="'success'" size="small" *ngIf="evento.registered">
+              Registrado
+            </nb-tag>
+          </div>
+          <p class="description">{{ evento.description }}</p>
+          <div class="evento-meta">
+            <span class="meta-item">
+              <nb-icon icon="calendar-outline"></nb-icon> 
+              {{ evento.date }} - {{ evento.time }}
+            </span>
+            <span class="meta-item">
+              <nb-icon icon="pin-outline"></nb-icon> 
+              {{ evento.location }}
+            </span>
+            <span class="meta-item">
+              <nb-icon icon="star-outline"></nb-icon> 
+              {{ evento.type }}
+            </span>
+          </div>
+        </div>
+        <div class="evento-actions">
+          <button nbButton ghost status="primary" size="small">
+            <nb-icon icon="eye-outline"></nb-icon> Ver Detalles
+          </button>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+

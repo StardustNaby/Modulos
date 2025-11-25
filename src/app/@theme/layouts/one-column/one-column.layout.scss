@@ -62,7 +62,7 @@
 
           &.selected {
             background: rgba(168, 85, 247, 0.2);
-            
+
             .menu-icon {
               color: #a855f7;
             }
@@ -76,30 +76,30 @@
       }
     }
 
-    // Estilos cuando el sidebar está colapsado - Iconos a la izquierda
+    // Estilos cuando el sidebar está colapsado - Iconos centrados (estilo Instagram)
     &.collapsed {
       overflow: hidden !important;
 
       .sidebar-profile {
         padding: 1rem 0.5rem !important;
         display: flex !important;
-        justify-content: flex-start !important;
+        justify-content: center !important;
         align-items: center !important;
         overflow: hidden !important;
 
         nb-user {
           ::ng-deep {
             .user-container {
-              flex-direction: row !important;
+              flex-direction: column !important;
               align-items: center !important;
-              justify-content: flex-start !important;
+              justify-content: center !important;
               width: 100% !important;
               overflow: hidden !important;
 
               .user-picture {
                 width: 2rem !important;
                 height: 2rem !important;
-                margin: 0 !important;
+                margin: 0 auto !important;
                 flex-shrink: 0 !important;
               }
 
@@ -107,8 +107,15 @@
               .user-title,
               .user-initials {
                 display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
                 width: 0 !important;
+                height: 0 !important;
                 overflow: hidden !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                font-size: 0 !important;
+                line-height: 0 !important;
               }
             }
           }
@@ -120,7 +127,7 @@
           .menu-items {
             .menu-item {
               display: flex !important;
-              justify-content: flex-start !important;
+              justify-content: center !important;
               align-items: center !important;
               padding: 0.75rem 0.5rem !important;
               margin: 0.25rem 0.25rem !important;
@@ -128,27 +135,46 @@
 
               a {
                 display: flex !important;
-                justify-content: flex-start !important;
+                justify-content: center !important;
                 align-items: center !important;
                 width: 100% !important;
                 padding: 0 !important;
                 overflow: hidden !important;
               }
 
-              // Iconos a la izquierda - tamaño normal
+              // Iconos centrados - tamaño pequeño
               .menu-icon,
               nb-icon {
                 margin: 0 !important;
                 flex-shrink: 0 !important;
-                // NO cambiar el tamaño, dejarlo normal
+                font-size: 1.25rem !important;
+                width: 1.25rem !important;
+                height: 1.25rem !important;
+                min-width: 1.25rem !important;
+                min-height: 1.25rem !important;
+                max-width: 1.25rem !important;
+                max-height: 1.25rem !important;
               }
 
-              // El texto queda fuera del área visible
+              nb-icon svg {
+                width: 1.25rem !important;
+                height: 1.25rem !important;
+              }
+
+              // El texto queda oculto
               .menu-title {
                 display: none !important;
-                width: 0 !important;
-                overflow: hidden !important;
+                visibility: hidden !important;
                 opacity: 0 !important;
+                width: 0 !important;
+                height: 0 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: hidden !important;
+                font-size: 0 !important;
+                line-height: 0 !important;
+                position: absolute !important;
+                left: -9999px !important;
               }
 
               .expand-state {
@@ -159,7 +185,7 @@
             // Ocultar grupos
             .menu-group {
               display: none !important;
-              
+
               .menu-group-title {
                 display: none !important;
               }

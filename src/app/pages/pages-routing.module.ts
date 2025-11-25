@@ -59,6 +59,21 @@ const routes: Routes = [{
         .then(m => m.ClassesModule),
     },
     {
+      path: 'academias',
+      loadChildren: () => import('./academias/academias.module')
+        .then(m => m.AcademiasModule),
+    },
+    {
+      path: 'eventos',
+      loadChildren: () => import('./eventos/eventos.module')
+        .then(m => m.EventosModule),
+    },
+    {
+      path: 'settings',
+      loadChildren: () => import('./settings/settings.module')
+        .then(m => m.SettingsModule),
+    },
+    {
       path: 'forms',
       loadChildren: () => import('./forms/forms.module')
         .then(m => m.FormsModule),

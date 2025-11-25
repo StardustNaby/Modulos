@@ -5,7 +5,7 @@
 @include nb-install-component() {
   .profile-page {
     min-height: 100vh;
-    background: linear-gradient(180deg, rgba(10, 7, 23, 0.85) 0%, rgba(6, 3, 14, 1) 35%);
+    background: nb-theme(background-basic-color-1);
     padding-bottom: 4rem;
   }
 
@@ -13,9 +13,10 @@
     height: 220px;
     background-size: cover;
     background-position: center;
-    border-bottom-left-radius: 32px;
-    border-bottom-right-radius: 32px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: nb-theme(background-basic-color-2);
+    border-bottom: 2px solid nb-theme(border-basic-color-3);
   }
 
   .profile-body {
@@ -24,7 +25,7 @@
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr);
     gap: 2rem;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
 
     @include media-breakpoint-down(md) {
       grid-template-columns: 1fr;
@@ -32,10 +33,10 @@
   }
 
   .profile-card {
-    background: rgba(17, 24, 39, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 24px;
-    backdrop-filter: blur(10px);
+    background: nb-theme(background-basic-color-2);
+    border: 1px solid nb-theme(border-basic-color-3);
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .profile-info {
@@ -53,9 +54,9 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    border: 4px solid rgba(168, 85, 247, 0.6);
-    padding: 6px;
-    background: linear-gradient(135deg, #c084fc, #f472b6);
+    border: 4px solid nb-theme(border-basic-color-3);
+    padding: 4px;
+    background: nb-theme(background-basic-color-1);
     align-self: flex-start;
     img {
       width: 100%;
@@ -80,6 +81,7 @@
     h2 {
       margin: 0;
       font-size: 1.85rem;
+      color: nb-theme(text-basic-color);
     }
 
     .username {
@@ -88,10 +90,11 @@
 
     .badge {
       padding: 0.2rem 0.75rem;
-      border-radius: 999px;
-      background: rgba(168, 85, 247, 0.15);
-      color: nb-theme(color-primary-200);
+      border-radius: 20px;
+      background: nb-theme(background-basic-color-3);
+      color: nb-theme(text-basic-color);
       font-size: 0.85rem;
+      border: 1px solid nb-theme(border-basic-color-3);
     }
   }
 
@@ -101,7 +104,7 @@
     flex-wrap: wrap;
 
     button[nbButton] {
-      border-radius: 999px;
+      border-radius: 20px;
     }
   }
 
@@ -111,14 +114,16 @@
     gap: 1rem;
 
     .stat {
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 16px;
+      background: nb-theme(background-basic-color-3);
+      border-radius: 12px;
       padding: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid nb-theme(border-basic-color-3);
+      text-align: center;
 
       strong {
         display: block;
         font-size: 1.3rem;
+        color: nb-theme(text-basic-color);
       }
 
       span {
@@ -164,10 +169,11 @@
 
     .highlight {
       text-align: center;
-      border: 2px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
+      border: 2px solid nb-theme(border-basic-color-3);
+      border-radius: 12px;
       padding: 0.75rem 1.25rem;
       min-width: 110px;
+      background: nb-theme(background-basic-color-3);
 
       .highlight-icon {
         width: 48px;
@@ -177,12 +183,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #0f0a1f;
+        background: nb-theme(background-basic-color-1);
+        color: nb-theme(text-basic-color);
       }
 
       span {
         font-size: 0.85rem;
         font-weight: 600;
+        color: nb-theme(text-basic-color);
       }
     }
   }
@@ -201,15 +209,17 @@
       letter-spacing: 0.08em;
       font-size: 0.75rem;
       padding: 0.5rem 1.5rem;
-      border-radius: 999px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
       gap: 0.4rem;
       cursor: pointer;
+      border: 1px solid transparent;
 
       &.active {
-        background: rgba(168, 85, 247, 0.2);
+        background: nb-theme(background-basic-color-3);
         color: nb-theme(text-basic-color);
+        border-color: nb-theme(border-basic-color-3);
       }
     }
   }
@@ -220,10 +230,10 @@
     gap: 1rem;
 
     .post-card {
-      border-radius: 16px;
+      border-radius: 12px;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: nb-theme(background-basic-color-3);
+      border: 1px solid nb-theme(border-basic-color-3);
       display: flex;
       flex-direction: column;
 
@@ -239,6 +249,7 @@
         strong {
           display: block;
           margin-bottom: 0.35rem;
+          color: nb-theme(text-basic-color);
         }
 
         small {
@@ -250,14 +261,20 @@
 
   .history-card,
   .cta-card {
-    border-radius: 20px;
-    background: rgba(17, 24, 39, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    background: nb-theme(background-basic-color-2);
+    border: 1px solid nb-theme(border-basic-color-3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .history-card {
     nb-card-header {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid nb-theme(border-basic-color-3);
+      background: nb-theme(background-basic-color-3);
+
+      h4 {
+        color: nb-theme(text-basic-color);
+      }
     }
 
     .header-title {
@@ -268,7 +285,7 @@
 
     .history-item {
       padding: 1rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid nb-theme(border-basic-color-3);
 
       &:last-child {
         border-bottom: none;
@@ -278,12 +295,13 @@
         text-transform: uppercase;
         font-size: 0.7rem;
         letter-spacing: 0.15em;
-        color: nb-theme(color-primary-200);
+        color: nb-theme(text-hint-color);
       }
 
       strong {
         display: block;
         margin-top: 0.35rem;
+        color: nb-theme(text-basic-color);
       }
 
       p {
@@ -300,10 +318,8 @@
       gap: 0.75rem;
 
       button[nbButton] {
-        border-radius: 14px;
+        border-radius: 12px;
       }
     }
   }
 }
-
-

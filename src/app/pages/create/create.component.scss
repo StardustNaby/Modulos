@@ -6,15 +6,17 @@
   .create-page {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem 0 4rem;
+    padding: 2rem 1rem 4rem;
+    background: nb-theme(background-basic-color-1);
   }
 
   .create-hero {
-    padding: 0 1.5rem 1.5rem;
+    padding: 0 1rem 1.5rem;
 
     h1 {
       margin: 0;
       font-size: 2rem;
+      color: nb-theme(text-basic-color);
     }
 
     p {
@@ -37,10 +39,11 @@
 
       .pill {
         padding: 0.25rem 0.75rem;
-        border-radius: 999px;
-        background: rgba(168, 85, 247, 0.15);
-        color: nb-theme(color-primary-200);
+        border-radius: 20px;
+        background: nb-theme(background-basic-color-2);
+        color: nb-theme(text-basic-color);
         font-size: 0.85rem;
+        border: 1px solid nb-theme(border-basic-color-3);
       }
     }
   }
@@ -49,7 +52,7 @@
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
     gap: 1.5rem;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
 
     @include media-breakpoint-down(md) {
       grid-template-columns: 1fr;
@@ -57,8 +60,9 @@
   }
 
   nb-card {
-    border-radius: 22px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid nb-theme(border-basic-color-3);
+    background: nb-theme(background-basic-color-2);
   }
 
   nb-card-header {
@@ -66,6 +70,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    background: nb-theme(background-basic-color-3);
+    border-bottom: 1px solid nb-theme(border-basic-color-3);
 
     .type {
       text-transform: uppercase;
@@ -82,12 +88,12 @@
     margin-bottom: 1rem;
 
     button[nbButton] {
-      border-radius: 14px;
-      border-color: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      border-color: nb-theme(border-basic-color-3);
 
       &.active {
-        background: rgba(168, 85, 247, 0.2);
-        border-color: rgba(168, 85, 247, 0.5);
+        background: nb-theme(background-basic-color-3);
+        border-color: nb-theme(border-basic-color-4);
       }
     }
   }
@@ -95,16 +101,16 @@
   textarea,
   input {
     width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid nb-theme(border-basic-color-3);
+    border-radius: 12px;
+    background: nb-theme(background-basic-color-1);
     color: nb-theme(text-basic-color);
     padding: 0.75rem 1rem;
     margin-bottom: 1rem;
 
     &:focus {
       outline: none;
-      border-color: rgba(168, 85, 247, 0.5);
+      border-color: nb-theme(border-basic-color-4);
     }
   }
 
@@ -114,7 +120,7 @@
     flex-wrap: wrap;
 
     button[nbButton] {
-      border-radius: 999px;
+      border-radius: 24px;
     }
   }
 
@@ -130,15 +136,15 @@
 
   .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    grid-template-columns: repeat(7, 1fr);
     gap: 0.5rem;
 
     .calendar-day {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
+      border: 1px solid nb-theme(border-basic-color-3);
+      border-radius: 8px;
       padding: 0.6rem;
       text-align: center;
-      background: rgba(255, 255, 255, 0.02);
+      background: nb-theme(background-basic-color-1);
 
       .day-label {
         font-size: 0.8rem;
@@ -150,6 +156,7 @@
         font-size: 1.4rem;
         font-weight: 600;
         margin: 0.2rem 0;
+        color: nb-theme(text-basic-color);
       }
 
       small {
@@ -161,27 +168,34 @@
       }
 
       &.busy {
-        border-color: rgba(244, 114, 182, 0.6);
-        background: rgba(244, 114, 182, 0.15);
+        border-color: nb-theme(color-danger-500);
+        background: nb-theme(background-basic-color-3);
 
         small {
-          color: #f472b6;
+          color: nb-theme(color-danger-500);
         }
       }
     }
   }
 
   .map-placeholder {
-    border-radius: 18px;
-    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    border: 2px dashed nb-theme(border-basic-color-3);
     padding: 1.5rem;
     text-align: center;
     margin: 1rem 0;
+    background: nb-theme(background-basic-color-1);
 
     nb-icon {
       font-size: 2rem;
       display: block;
       margin-bottom: 0.5rem;
+      color: nb-theme(text-hint-color);
+    }
+
+    p {
+      color: nb-theme(text-hint-color);
+      margin: 0;
     }
   }
 
@@ -195,4 +209,3 @@
     }
   }
 }
-

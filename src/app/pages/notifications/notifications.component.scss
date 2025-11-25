@@ -5,17 +5,19 @@
 @include nb-install-component() {
   .notifications-page {
     min-height: 100vh;
-    padding: 2rem 0 4rem;
+    padding: 2rem 1rem 4rem;
     max-width: 900px;
     margin: 0 auto;
+    background: nb-theme(background-basic-color-1);
   }
 
   .notifications-hero {
-    padding: 0 1.5rem 1.5rem;
+    padding: 0 1rem 1.5rem;
 
     h1 {
       margin: 0;
       font-size: 2rem;
+      color: nb-theme(text-basic-color);
     }
 
     p {
@@ -28,22 +30,23 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
   }
 
   .notification-card {
-    border-radius: 18px;
-    background: rgba(9, 7, 18, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    background: nb-theme(background-basic-color-2);
+    border: 1px solid nb-theme(border-basic-color-3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     &.follow {
-      border-left: 3px solid #a855f7;
+      border-left: 3px solid nb-theme(color-primary-500);
     }
     &.class {
-      border-left: 3px solid #38bdf8;
+      border-left: 3px solid nb-theme(color-info-500);
     }
     &.event {
-      border-left: 3px solid #f472b6;
+      border-left: 3px solid nb-theme(color-success-500);
     }
 
     nb-card-body {
@@ -62,15 +65,15 @@
   .icon-wrapper {
     width: 54px;
     height: 54px;
-    border-radius: 16px;
-    background: rgba(168, 85, 247, 0.15);
+    border-radius: 12px;
+    background: nb-theme(background-basic-color-3);
     display: flex;
     align-items: center;
     justify-content: center;
 
     nb-icon {
       font-size: 1.4rem;
-      color: #c084fc;
+      color: nb-theme(text-basic-color);
     }
   }
 
@@ -93,4 +96,3 @@
     }
   }
 }
-

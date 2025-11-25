@@ -4,9 +4,9 @@
 
 @include nb-install-component() {
   .explore-page {
-    padding: 2rem 0 4rem;
+    padding: 2rem 1rem 4rem;
     min-height: 100vh;
-    background: linear-gradient(180deg, rgba(8, 4, 18, 0.95), rgba(4, 2, 10, 1));
+    background: nb-theme(background-basic-color-1);
     max-width: 1100px;
     margin: 0 auto;
   }
@@ -16,11 +16,12 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
 
     h1 {
       margin: 0;
       font-size: 2.1rem;
+      color: nb-theme(text-basic-color);
     }
 
     p {
@@ -29,8 +30,8 @@
     }
 
     button[nbButton] {
-      border-radius: 999px;
-      border-color: rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      border-color: nb-theme(border-basic-color-3);
       nb-icon {
         margin-right: 0.4rem;
       }
@@ -42,7 +43,7 @@
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1rem;
     margin-bottom: 2.5rem;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
   }
 
   .tag-card {
@@ -50,14 +51,13 @@
     align-items: center;
     gap: 0.9rem;
     padding: 1rem;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    border-radius: 12px;
+    background: nb-theme(background-basic-color-2);
+    border: 1px solid nb-theme(border-basic-color-3);
+    transition: border-color 0.2s ease;
 
     &:hover {
-      transform: translateY(-4px);
-      border-color: rgba(168, 85, 247, 0.4);
+      border-color: nb-theme(border-basic-color-4);
     }
 
     .tag-emoji {
@@ -70,6 +70,7 @@
       strong {
         display: block;
         margin-bottom: 0.2rem;
+        color: nb-theme(text-basic-color);
       }
 
       span {
@@ -80,11 +81,12 @@
   }
 
   .posts-header {
-    padding: 0 1.5rem;
+    padding: 0 1rem;
     margin-bottom: 1rem;
 
     h3 {
       margin: 0;
+      color: nb-theme(text-basic-color);
     }
 
     span {
@@ -97,15 +99,15 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.2rem;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
   }
 
   .post-card {
-    border-radius: 22px;
+    border-radius: 12px;
     overflow: hidden;
-    background: rgba(10, 6, 20, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    background: nb-theme(background-basic-color-2);
+    border: 1px solid nb-theme(border-basic-color-3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
 
@@ -119,12 +121,13 @@
         position: absolute;
         top: 1rem;
         left: 1rem;
-        background: rgba(0, 0, 0, 0.65);
+        background: rgba(0, 0, 0, 0.7);
         padding: 0.35rem 0.9rem;
-        border-radius: 999px;
+        border-radius: 20px;
         font-size: 0.75rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+        color: white;
       }
     }
 
@@ -149,4 +152,3 @@
     }
   }
 }
-

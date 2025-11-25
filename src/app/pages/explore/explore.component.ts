@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 interface ExploreTag {
   label: string;
@@ -17,6 +18,14 @@ interface ExplorePost {
   selector: 'ngx-explore-page',
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.scss'],
+  animations: [
+    trigger('pageAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class ExploreComponent {
   tags: ExploreTag[] = [

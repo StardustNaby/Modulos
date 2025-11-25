@@ -1,0 +1,83 @@
+<div class="settings-container" [@pageAnimation]>
+  <nb-card>
+    <nb-card-header>
+      <h3>Configuración</h3>
+      <p class="subtitle">Administra tus preferencias y configuraciones de cuenta</p>
+    </nb-card-header>
+    
+    <nb-card-body>
+      <div *ngFor="let category of settingsCategories; let catIndex = index" class="settings-category">
+        <div class="category-header">
+          <nb-icon [icon]="category.icon" status="primary"></nb-icon>
+          <h4>{{ category.title }}</h4>
+        </div>
+
+        <div class="settings-list">
+          <div *ngFor="let setting of category.settings; let setIndex = index" class="setting-item">
+            <div class="setting-info">
+              <label class="setting-label">{{ setting.label }}</label>
+              <p class="setting-description">{{ setting.description }}</p>
+            </div>
+
+            <div class="setting-control">
+              <!-- Toggle Switch -->
+              <nb-toggle 
+                *ngIf="setting.type === 'toggle'"
+                [(ngModel)]="setting.value"
+                (ngModelChange)="updateSetting(catIndex, setIndex, $event)"
+                [status]="setting.value ? 'success' : 'basic'">
+              </nb-toggle>
+
+              <!-- Select Dropdown -->
+              <nb-select 
+                *ngIf="setting.type === 'select'"
+                [(selected)]="setting.value"
+                (selectedChange)="updateSetting(catIndex, setIndex, $event)"
+                [status]="'primary'">
+                <nb-option *ngFor="let option of setting.options" [value]="option.value">
+                  {{ option.label }}
+                </nb-option>
+              </nb-select>
+
+              <!-- Text Input -->
+              <input 
+                *ngIf="setting.type === 'text'"
+                nbInput 
+                type="text"
+                [(ngModel)]="setting.value"
+                (ngModelChange)="updateSetting(catIndex, setIndex, $event)"
+                placeholder="Ingresa el valor">
+
+              <!-- Number Input -->
+              <input 
+                *ngIf="setting.type === 'number'"
+                nbInput 
+                type="number"
+                [(ngModel)]="setting.value"
+                (ngModelChange)="updateSetting(catIndex, setIndex, $event)"
+                placeholder="Ingresa el valor">
+
+              <!-- Textarea -->
+              <textarea 
+                *ngIf="setting.type === 'textarea'"
+                nbInput
+                [(ngModel)]="setting.value"
+                (ngModelChange)="updateSetting(catIndex, setIndex, $event)"
+                rows="3"
+                placeholder="Ingresa el valor">
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-footer">
+        <p class="auto-save-notice">
+          <nb-icon icon="checkmark-circle-2-outline" status="success"></nb-icon>
+          Los cambios se guardan automáticamente
+        </p>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+

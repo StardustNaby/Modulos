@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 interface RegisteredClass {
   title: string;
@@ -13,6 +14,14 @@ interface RegisteredClass {
   selector: 'ngx-classes-page',
   templateUrl: './classes.component.html',
   styleUrls: ['./classes.component.scss'],
+  animations: [
+    trigger('pageAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class ClassesComponent {
   registeredClasses: RegisteredClass[] = [

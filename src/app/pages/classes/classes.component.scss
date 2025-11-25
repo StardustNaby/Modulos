@@ -6,14 +6,16 @@
   .classes-page {
     max-width: 900px;
     margin: 0 auto;
-    padding: 2rem 0 4rem;
+    padding: 2rem 1rem 4rem;
+    background: nb-theme(background-basic-color-1);
   }
 
   .classes-header {
-    padding: 0 1.5rem 1rem;
+    padding: 0 1rem 1rem;
 
     h1 {
       margin: 0;
+      color: nb-theme(text-basic-color);
     }
 
     p {
@@ -26,12 +28,14 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
   }
 
   .class-card {
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid nb-theme(border-basic-color-3);
+    background: nb-theme(background-basic-color-2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     nb-card-body {
       display: flex;
@@ -47,6 +51,7 @@
   .class-main {
     h4 {
       margin: 0;
+      color: nb-theme(text-basic-color);
     }
 
     .studio {
@@ -86,14 +91,15 @@
     align-items: center;
     gap: 0.4rem;
     padding: 0.3rem 0.75rem;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    border: 1px solid nb-theme(border-basic-color-3);
     font-size: 0.85rem;
+    background: nb-theme(background-basic-color-3);
+    color: nb-theme(text-basic-color);
 
     &.active {
-      border-color: rgba(56, 189, 248, 0.6);
-      color: #38bdf8;
+      border-color: nb-theme(color-success-500);
+      color: nb-theme(color-success-500);
     }
   }
 }
-

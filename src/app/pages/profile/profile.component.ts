@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 interface ProfileStat {
   label: string;
@@ -27,6 +28,22 @@ interface ProfilePost {
   selector: 'ngx-profile-page',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
+  animations: [
+    trigger('pageAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('400ms ease-out', style({ opacity: 1 })),
+        query('.history-item', [
+          style({ opacity: 0 }),
+          stagger(100, animate('400ms ease-out', style({ opacity: 1 })))
+        ], { optional: true }),
+        query('.post-item', [
+          style({ opacity: 0 }),
+          stagger(80, animate('350ms ease-out', style({ opacity: 1 })))
+        ], { optional: true }),
+      ])
+    ])
+  ]
 })
 export class ProfileComponent {
   user = {
