@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/cor
 import { NbSidebarService, NbMediaBreakpointsService, NbThemeService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
+import { LayoutService } from '../../../@core/utils';
 
 @Component({
   selector: 'ngx-one-column-layout',
@@ -12,12 +13,17 @@ import { takeUntil, map } from 'rxjs/operators';
         <ngx-header></ngx-header>
       </nb-layout-header>
 
-      <nb-sidebar 
-        class="menu-sidebar" 
-        tag="menu-sidebar" 
+      <nb-sidebar
+        class="menu-sidebar"
+        tag="menu-sidebar"
         responsive
         start="collapsed"
         containerFixed>
+        <div class="sidebar-header">
+          <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+            <nb-icon icon="menu-2-outline"></nb-icon>
+          </a>
+        </div>
         <div class="sidebar-profile" (click)="onProfileClick()">
           <nb-user
             [picture]="user.picture"
@@ -52,6 +58,7 @@ export class OneColumnLayoutComponent implements OnInit, OnDestroy {
     private sidebarService: NbSidebarService,
     private breakpointService: NbMediaBreakpointsService,
     private themeService: NbThemeService,
+    private layoutService: LayoutService,
   ) {}
 
   ngOnInit() {
@@ -88,5 +95,11 @@ export class OneColumnLayoutComponent implements OnInit, OnDestroy {
 
   onProfileClick() {
     this.profileClick.emit();
+  }
+
+  toggleSidebar(): boolean {
+    this.sidebarService.toggle(true, 'menu-sidebar');
+    this.layoutService.changeLayoutSize();
+    return false;
   }
 }

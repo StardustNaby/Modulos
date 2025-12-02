@@ -9,20 +9,26 @@
   // Asegurar que cuando el sidebar está colapsado, no reserve espacio en el layout
   nb-layout {
     nb-sidebar.menu-sidebar.collapsed {
-      // El sidebar colapsado no debe ocupar espacio
+      // El sidebar colapsado no debe ocupar espacio (deslizándose hacia arriba)
       flex: 0 0 0 !important;
-      width: 0 !important;
-      min-width: 0 !important;
-      max-width: 0 !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      max-height: 0 !important;
     }
 
-    // Cuando el sidebar está colapsado, el layout-column debe ocupar todo el ancho
+    // Cuando el sidebar está colapsado, el layout-column debe ocupar todo el espacio
     nb-sidebar.menu-sidebar.collapsed ~ nb-layout-column,
     nb-sidebar.menu-sidebar.collapsed + nb-layout-column {
-      padding-left: 0 !important;
-      margin-left: 0 !important;
+      padding-top: 0 !important;
+      margin-top: 0 !important;
       width: 100% !important;
       max-width: 100% !important;
+    }
+
+    // Cuando el sidebar está expandido, debe tener un fondo y posicionarse desde arriba
+    nb-sidebar.menu-sidebar:not(.collapsed) {
+      background: nb-theme(background-basic-color-1) !important;
+      border-bottom: 1px solid nb-theme(divider-color) !important;
     }
   }
 }

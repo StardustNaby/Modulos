@@ -33,16 +33,16 @@
   @include nb-overrides();
 };
 
-// Estilos globales para sidebar colapsado - OCULTAR COMPLETAMENTE en TODAS las resoluciones
+// Estilos globales para sidebar colapsado - OCULTAR COMPLETAMENTE deslizándose hacia arriba
 // Usar alta especificidad para sobrescribir estilos de Nebular
 nb-layout nb-sidebar.menu-sidebar.collapsed,
 nb-sidebar.menu-sidebar.collapsed,
 .menu-sidebar.collapsed {
-  // Ocultar completamente el sidebar en todas las resoluciones (sin display:none para permitir transiciones)
-  transform: translateX(-100%) !important;
-  width: 0 !important;
-  min-width: 0 !important;
-  max-width: 0 !important;
+  // Ocultar completamente el sidebar deslizándose hacia arriba (sin display:none para permitir transiciones)
+  transform: translateY(-100%) !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
   border: none !important;
@@ -51,22 +51,23 @@ nb-sidebar.menu-sidebar.collapsed,
   visibility: hidden !important;
   pointer-events: none !important;
   position: fixed !important;
-  left: -100% !important;
   top: 0 !important;
-  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
   z-index: -1 !important;
   clip: rect(0, 0, 0, 0) !important;
   clip-path: inset(100%) !important;
   // Asegurar que no ocupe espacio
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
   // Forzar que no tenga flex
   flex: 0 0 0 !important;
   flex-basis: 0 !important;
   flex-grow: 0 !important;
   flex-shrink: 0 !important;
-  transition: transform 0.3s ease, width 0.3s ease, min-width 0.3s ease, max-width 0.3s ease,
-    opacity 0.3s ease, visibility 0.3s ease, left 0.3s ease !important;
+  transition: transform 0.3s ease, height 0.3s ease, min-height 0.3s ease, max-height 0.3s ease,
+    opacity 0.3s ease, visibility 0.3s ease, top 0.3s ease !important;
 
   ::ng-deep {
     nb-menu {
@@ -217,22 +218,25 @@ nb-sidebar.menu-sidebar.collapsed,
     }
   }
 
-  // Media query específico para pantallas grandes (xl) - Forzar ancho 0 en 1920x1080
-  // Esto asegura que el sidebar colapsado desaparezca completamente en resoluciones grandes
+  // Media query específico para pantallas grandes (xl) - Forzar altura 0 en 1920x1080
+  // Esto asegura que el sidebar colapsado desaparezca completamente deslizándose hacia arriba
   @include media-breakpoint-up(xl) {
     nb-layout nb-sidebar.menu-sidebar.collapsed,
     nb-sidebar.menu-sidebar.collapsed,
     .menu-sidebar.collapsed {
-      // Forzar que el sidebar colapsado desaparezca completamente en pantallas grandes
-      width: 0 !important;
-      min-width: 0 !important;
-      max-width: 0 !important;
-      transform: translateX(-100%) !important;
+      // Forzar que el sidebar colapsado desaparezca completamente deslizándose hacia arriba
+      height: 0 !important;
+      min-height: 0 !important;
+      max-height: 0 !important;
+      transform: translateY(-100%) !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
       position: fixed !important;
-      left: -100% !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
       z-index: -1 !important;
       clip: rect(0, 0, 0, 0) !important;
       clip-path: inset(100%) !important;
@@ -241,15 +245,15 @@ nb-sidebar.menu-sidebar.collapsed,
       flex-basis: 0 !important;
       flex-grow: 0 !important;
       flex-shrink: 0 !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
     }
 
-    // Asegurar que el layout-column ocupe todo el ancho cuando el sidebar está colapsado
+    // Asegurar que el layout-column ocupe todo el espacio cuando el sidebar está colapsado
     nb-layout nb-sidebar.menu-sidebar.collapsed ~ nb-layout-column,
     nb-layout nb-sidebar.menu-sidebar.collapsed + nb-layout-column {
-      padding-left: 0 !important;
-      margin-left: 0 !important;
+      padding-top: 0 !important;
+      margin-top: 0 !important;
       width: 100% !important;
       max-width: 100% !important;
     }
