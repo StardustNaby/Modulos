@@ -32,17 +32,56 @@
   @include nb-overrides();
 };
 
-// Estilos globales para sidebar colapsado - ESTILO INSTAGRAM
-nb-sidebar.menu-sidebar.collapsed {
+// Estilos globales para sidebar colapsado - OCULTAR COMPLETAMENTE en TODAS las resoluciones
+// Usar alta especificidad para sobrescribir estilos de Nebular
+nb-layout nb-sidebar.menu-sidebar.collapsed,
+nb-sidebar.menu-sidebar.collapsed,
+.menu-sidebar.collapsed {
+  // Ocultar completamente el sidebar en todas las resoluciones (sin display:none para permitir transiciones)
+  transform: translateX(-100%) !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: fixed !important;
+  left: -100% !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  z-index: -1 !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(100%) !important;
+  // Asegurar que no ocupe espacio
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  // Forzar que no tenga flex
+  flex: 0 0 0 !important;
+  flex-basis: 0 !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.3s ease, width 0.3s ease, min-width 0.3s ease, max-width 0.3s ease,
+    opacity 0.3s ease, visibility 0.3s ease, left 0.3s ease !important;
+
   ::ng-deep {
     nb-menu {
+      width: 100% !important;
+
       .menu-items {
+        width: 100% !important;
+
         .menu-item {
           display: flex !important;
           justify-content: center !important;
           align-items: center !important;
           padding: 0.75rem 0.5rem !important;
-          margin: 0.25rem !important;
+          margin: 0.25rem 0.5rem !important;
+          width: calc(100% - 1rem) !important;
+          overflow: hidden !important;
 
           a {
             display: flex !important;
@@ -50,6 +89,26 @@ nb-sidebar.menu-sidebar.collapsed {
             align-items: center !important;
             width: 100% !important;
             padding: 0 !important;
+            position: relative !important;
+          }
+
+          // OCULTAR TODO EL TEXTO Y ELEMENTOS DE TEXTO
+          .menu-title,
+          .menu-item-title,
+          span:not(.menu-icon):not(nb-icon):not(.menu-icon-wrapper) {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+            font-size: 0 !important;
+            line-height: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
+            text-indent: -9999px !important;
           }
 
           // Iconos pequeños - NO agrandar
@@ -63,6 +122,10 @@ nb-sidebar.menu-sidebar.collapsed {
             min-height: 1.25rem !important;
             max-width: 1.25rem !important;
             max-height: 1.25rem !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
           }
 
           nb-icon svg {
@@ -70,37 +133,39 @@ nb-sidebar.menu-sidebar.collapsed {
             height: 1.25rem !important;
           }
 
-          // OCULTAR TODO EL TEXTO
-          .menu-title {
+          .expand-state {
             display: none !important;
             visibility: hidden !important;
             opacity: 0 !important;
             width: 0 !important;
             height: 0 !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            overflow: hidden !important;
-            font-size: 0 !important;
-            line-height: 0 !important;
-            position: absolute !important;
-            left: -9999px !important;
           }
 
-          // Ocultar cualquier span con texto
-          span:not(.menu-icon):not(nb-icon) {
-            display: none !important;
-          }
-
-          .expand-state {
+          // Ocultar submenús
+          .menu-children {
             display: none !important;
           }
         }
 
         .menu-group {
           display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+          height: 0 !important;
+          overflow: hidden !important;
+          margin: 0 !important;
+          padding: 0 !important;
 
           .menu-group-title {
             display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 0 !important;
+            line-height: 0 !important;
           }
         }
       }
@@ -112,18 +177,22 @@ nb-sidebar.menu-sidebar.collapsed {
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
+      overflow: hidden !important;
+      min-height: 4rem !important;
 
       nb-user {
-        .user-container {
+        ::ng-deep .user-container {
           flex-direction: column !important;
           align-items: center !important;
           justify-content: center !important;
           width: 100% !important;
+          overflow: hidden !important;
 
           .user-picture {
             width: 2rem !important;
             height: 2rem !important;
             margin: 0 auto !important;
+            flex-shrink: 0 !important;
           }
 
           .user-name,
@@ -139,6 +208,8 @@ nb-sidebar.menu-sidebar.collapsed {
             overflow: hidden !important;
             font-size: 0 !important;
             line-height: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
           }
         }
       }

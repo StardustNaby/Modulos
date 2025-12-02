@@ -5,4 +5,24 @@
       margin-right: -10px;
     }
   }
+
+  // Asegurar que cuando el sidebar está colapsado, no reserve espacio en el layout
+  nb-layout {
+    nb-sidebar.menu-sidebar.collapsed {
+      // El sidebar colapsado no debe ocupar espacio
+      flex: 0 0 0 !important;
+      width: 0 !important;
+      min-width: 0 !important;
+      max-width: 0 !important;
+    }
+
+    // Cuando el sidebar está colapsado, el layout-column debe ocupar todo el ancho
+    nb-sidebar.menu-sidebar.collapsed ~ nb-layout-column,
+    nb-sidebar.menu-sidebar.collapsed + nb-layout-column {
+      padding-left: 0 !important;
+      margin-left: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }
 }

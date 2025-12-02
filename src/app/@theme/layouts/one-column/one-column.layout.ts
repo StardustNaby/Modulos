@@ -1,4 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
+import { NbSidebarService, NbMediaBreakpointsService, NbThemeService } from '@nebular/theme';
+import { Subject } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-one-column-layout',
@@ -11,8 +14,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
       <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive>
         <div class="sidebar-profile" (click)="onProfileClick()">
-          <nb-user 
-            [picture]="user.picture" 
+          <nb-user
+            [picture]="user.picture"
             [name]="user.name"
             size="medium">
           </nb-user>
@@ -30,13 +33,43 @@ import { Component, EventEmitter, Output } from '@angular/core';
     </nb-layout>
   `,
 })
-export class OneColumnLayoutComponent {
+export class OneColumnLayoutComponent implements OnInit, OnDestroy {
   @Output() profileClick = new EventEmitter<void>();
-  
+
+  private destroy$: Subject<void> = new Subject<void>();
+
   user = {
     name: 'Groovia Coach',
     picture: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80',
   };
+
+  constructor(
+    private sidebarService: NbSidebarService,
+    private breakpointService: NbMediaBreakpointsService,
+    private themeService: NbThemeService,
+  ) {}
+
+  ngOnInit() {
+    // Detectar cambios en el tamaño de pantalla y colapsar el sidebar automáticamente en móviles
+    const { md } = this.breakpointService.getBreakpointsMap();
+
+    this.themeService.onMediaQueryChange()
+      .pipe(
+        map(([, currentBreakpoint]) => currentBreakpoint.width < md),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((isLessThanMd: boolean) => {
+        if (isLessThanMd) {
+          // En pantallas pequeñas, colapsar el sidebar automáticamente
+          this.sidebarService.collapse('menu-sidebar');
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   onProfileClick() {
     this.profileClick.emit();

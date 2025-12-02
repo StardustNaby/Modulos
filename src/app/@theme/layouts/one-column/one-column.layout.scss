@@ -3,9 +3,25 @@
 @import '@nebular/theme/styles/global/breakpoints';
 
 @include nb-install-component() {
+  // Asegurar que el layout no reserve espacio cuando el sidebar está colapsado
+  :host {
+    nb-layout {
+      &.with-sidebar {
+        nb-sidebar.menu-sidebar.collapsed ~ nb-layout-column {
+          padding-left: 0 !important;
+          margin-left: 0 !important;
+        }
+      }
+    }
+  }
+
   .menu-sidebar {
+    transition: transform 0.3s ease, width 0.3s ease, min-width 0.3s ease, max-width 0.3s ease,
+      opacity 0.3s ease, visibility 0.3s ease !important;
+
     ::ng-deep .scrollable {
       padding-top: 0;
+      transition: all 0.3s ease;
     }
 
     // Estilos globales para cuando está colapsado - aplicar primero
@@ -33,6 +49,7 @@
       border-bottom: 1px solid rgba(168, 85, 247, 0.1);
       cursor: pointer;
       transition: all 0.3s ease;
+      overflow: hidden;
 
       &:hover {
         background: rgba(168, 85, 247, 0.05);
@@ -40,21 +57,29 @@
 
       nb-user {
         ::ng-deep .user-container {
+          transition: all 0.3s ease;
+
           .user-name {
             font-weight: 600;
             font-size: 1rem;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            transition: opacity 0.3s ease, visibility 0.3s ease, width 0.3s ease, height 0.3s ease;
+            white-space: nowrap;
           }
         }
       }
     }
 
     ::ng-deep nb-menu {
+      transition: all 0.3s ease;
+
       .menu-items {
+        transition: all 0.3s ease;
+
         .menu-item {
           margin: 0.25rem 0.5rem;
           border-radius: 8px;
-          transition: all 0.2s;
+          transition: all 0.3s ease;
+          overflow: hidden;
 
           &:hover {
             background: rgba(168, 85, 247, 0.1);
@@ -70,15 +95,42 @@
 
           .menu-title {
             font-size: 0.95rem;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            transition: opacity 0.3s ease, visibility 0.3s ease, width 0.3s ease, height 0.3s ease;
+            white-space: nowrap;
           }
         }
       }
     }
 
-    // Estilos cuando el sidebar está colapsado - Iconos centrados (estilo Instagram)
+    // Estilos cuando el sidebar está colapsado - Ocultar completamente en TODAS las resoluciones
     &.collapsed {
+      // Ocultar completamente el sidebar (sin display:none para permitir transiciones)
+      transform: translateX(-100%) !important;
+      width: 0 !important;
+      min-width: 0 !important;
+      max-width: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important;
       overflow: hidden !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      position: fixed !important;
+      left: -100% !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      z-index: -1 !important;
+      clip: rect(0, 0, 0, 0) !important;
+      clip-path: inset(100%) !important;
+      // Asegurar que no ocupe espacio
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      // Forzar que no tenga flex
+      flex: 0 0 0 !important;
+      flex-basis: 0 !important;
+      flex-grow: 0 !important;
+      flex-shrink: 0 !important;
 
       .sidebar-profile {
         padding: 1rem 0.5rem !important;
@@ -86,6 +138,7 @@
         justify-content: center !important;
         align-items: center !important;
         overflow: hidden !important;
+        min-height: 4rem !important;
 
         nb-user {
           ::ng-deep {
@@ -116,6 +169,8 @@
                 padding: 0 !important;
                 font-size: 0 !important;
                 line-height: 0 !important;
+                position: absolute !important;
+                left: -9999px !important;
               }
             }
           }
@@ -124,14 +179,21 @@
 
       ::ng-deep {
         nb-menu {
+          width: 100% !important;
+
           .menu-items {
+            width: 100% !important;
+
             .menu-item {
               display: flex !important;
               justify-content: center !important;
               align-items: center !important;
               padding: 0.75rem 0.5rem !important;
-              margin: 0.25rem !important;
+              margin: 0.25rem 0.5rem !important;
               overflow: hidden !important;
+              width: calc(100% - 1rem) !important;
+              min-width: auto !important;
+              max-width: 100% !important;
 
               a {
                 display: flex !important;
@@ -140,6 +202,26 @@
                 width: 100% !important;
                 padding: 0 !important;
                 overflow: hidden !important;
+                position: relative !important;
+              }
+
+              // Ocultar TODOS los textos y spans que no sean iconos
+              .menu-title,
+              span:not(.menu-icon):not(nb-icon),
+              .menu-item-title {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                width: 0 !important;
+                height: 0 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: hidden !important;
+                font-size: 0 !important;
+                line-height: 0 !important;
+                position: absolute !important;
+                left: -9999px !important;
+                text-indent: -9999px !important;
               }
 
               // Iconos centrados - tamaño pequeño
@@ -154,6 +236,9 @@
                 min-height: 1.25rem !important;
                 max-width: 1.25rem !important;
                 max-height: 1.25rem !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
               }
 
               nb-icon svg {
@@ -161,33 +246,40 @@
                 height: 1.25rem !important;
               }
 
-              // El texto queda oculto
-              .menu-title {
+              .expand-state {
                 display: none !important;
                 visibility: hidden !important;
                 opacity: 0 !important;
                 width: 0 !important;
                 height: 0 !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                overflow: hidden !important;
-                font-size: 0 !important;
-                line-height: 0 !important;
-                position: absolute !important;
-                left: -9999px !important;
               }
 
-              .expand-state {
+              // Ocultar submenús cuando está colapsado
+              .menu-children {
                 display: none !important;
               }
             }
 
-            // Ocultar grupos
+            // Ocultar grupos completamente
             .menu-group {
               display: none !important;
+              visibility: hidden !important;
+              opacity: 0 !important;
+              height: 0 !important;
+              overflow: hidden !important;
+              margin: 0 !important;
+              padding: 0 !important;
 
               .menu-group-title {
                 display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                height: 0 !important;
+                width: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                font-size: 0 !important;
+                line-height: 0 !important;
               }
             }
           }
@@ -197,6 +289,14 @@
 
     // Estilos cuando el sidebar está expandido
     &:not(.collapsed) {
+      transform: translateX(0) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      position: relative !important;
+      left: 0 !important;
+      z-index: auto !important;
+      pointer-events: auto !important;
+
       .sidebar-profile {
         nb-user {
           ::ng-deep .user-container {
@@ -233,6 +333,67 @@
             }
           }
         }
+      }
+    }
+
+    // Media queries para pantallas pequeñas - Asegurar que el sidebar responsive funcione correctamente
+    // Nebular maneja automáticamente el colapso con el atributo 'responsive', pero ajustamos estilos
+    @include media-breakpoint-down(md) {
+      // En pantallas medianas y pequeñas, cuando está colapsado (clase .collapsed de Nebular)
+      &.collapsed {
+        // Asegurar que esté completamente oculto cuando está colapsado en móvil
+        transform: translateX(-100%) !important;
+        width: 0 !important;
+        min-width: 0 !important;
+        max-width: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        position: fixed !important;
+        z-index: 998 !important;
+      }
+
+      // Cuando NO está colapsado (se expande manualmente con toggle), mostrar como overlay
+      &:not(.collapsed) {
+        position: fixed !important;
+        z-index: 999 !important;
+        width: 280px !important;
+        min-width: 280px !important;
+        max-width: 280px !important;
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15) !important;
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      // En pantallas muy pequeñas, cuando está colapsado
+      &.collapsed {
+        transform: translateX(-100%) !important;
+        width: 0 !important;
+        min-width: 0 !important;
+        max-width: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        position: fixed !important;
+        z-index: 998 !important;
+      }
+
+      // Cuando se expande manualmente en móvil pequeño, mostrar como overlay más estrecho
+      &:not(.collapsed) {
+        position: fixed !important;
+        z-index: 999 !important;
+        width: 260px !important;
+        min-width: 260px !important;
+        max-width: 260px !important;
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15) !important;
       }
     }
   }
