@@ -12,7 +12,12 @@ import { takeUntil, map } from 'rxjs/operators';
         <ngx-header></ngx-header>
       </nb-layout-header>
 
-      <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive>
+      <nb-sidebar 
+        class="menu-sidebar" 
+        tag="menu-sidebar" 
+        responsive
+        start="collapsed"
+        containerFixed>
         <div class="sidebar-profile" (click)="onProfileClick()">
           <nb-user
             [picture]="user.picture"
@@ -62,8 +67,18 @@ export class OneColumnLayoutComponent implements OnInit, OnDestroy {
         if (isLessThanMd) {
           // En pantallas pequeñas, colapsar el sidebar automáticamente
           this.sidebarService.collapse('menu-sidebar');
+        } else {
+          // En pantallas grandes, también asegurar que esté colapsado inicialmente
+          // (el atributo start="collapsed" ya lo hace, pero esto es un refuerzo)
+          this.sidebarService.collapse('menu-sidebar');
         }
       });
+
+    // Colapsar el sidebar al iniciar en todas las resoluciones
+    // El atributo start="collapsed" debería hacer esto, pero lo reforzamos
+    setTimeout(() => {
+      this.sidebarService.collapse('menu-sidebar');
+    }, 0);
   }
 
   ngOnDestroy() {

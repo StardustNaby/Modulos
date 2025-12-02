@@ -11,6 +11,7 @@
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/mixins';
 @import 'bootstrap/scss/grid';
+@import '@nebular/theme/styles/global/breakpoints';
 
 // loading progress bar theme
 @import './pace.theme';
@@ -213,6 +214,44 @@ nb-sidebar.menu-sidebar.collapsed,
           }
         }
       }
+    }
+  }
+
+  // Media query específico para pantallas grandes (xl) - Forzar ancho 0 en 1920x1080
+  // Esto asegura que el sidebar colapsado desaparezca completamente en resoluciones grandes
+  @include media-breakpoint-up(xl) {
+    nb-layout nb-sidebar.menu-sidebar.collapsed,
+    nb-sidebar.menu-sidebar.collapsed,
+    .menu-sidebar.collapsed {
+      // Forzar que el sidebar colapsado desaparezca completamente en pantallas grandes
+      width: 0 !important;
+      min-width: 0 !important;
+      max-width: 0 !important;
+      transform: translateX(-100%) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      position: fixed !important;
+      left: -100% !important;
+      z-index: -1 !important;
+      clip: rect(0, 0, 0, 0) !important;
+      clip-path: inset(100%) !important;
+      // Asegurar que no ocupe espacio
+      flex: 0 0 0 !important;
+      flex-basis: 0 !important;
+      flex-grow: 0 !important;
+      flex-shrink: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    // Asegurar que el layout-column ocupe todo el ancho cuando el sidebar está colapsado
+    nb-layout nb-sidebar.menu-sidebar.collapsed ~ nb-layout-column,
+    nb-layout nb-sidebar.menu-sidebar.collapsed + nb-layout-column {
+      padding-left: 0 !important;
+      margin-left: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
     }
   }
 }
